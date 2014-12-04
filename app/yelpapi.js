@@ -21,7 +21,6 @@ function YelpClient(authConfig){
   this.auth = new OAuth(null, null, authConfig.key, authConfig.secret, "1.0", null, 'HMAC-SHA1');
   this.OAuthToken = authConfig.OAuthToken;
   this.OAuthTokenSecret = authConfig.OAuthTokenSecret;
-  console.log(authConfig)
 };
 
 /*
@@ -63,15 +62,15 @@ YelpClient.prototype.searchRestaurants = function(params, cb){
 exports.YelpClient = YelpClient;
 
 
-// EXAMPLE USAGE
+// // EXAMPLE USAGE
 // var authConfig = {
 //   OAuthToken: 'Token',
 //   OAuthTokenSecret: 'TokenSecret',
 //   key: 'Consumer Key',
 //   secret: 'Consumer Secret'
 // };
-// 
-// For testing purposes(command line use);
+
+// // For testing purposes(command line use);
 // authConfig.OAuthToken = process.argv[2];
 // authConfig.OAuthTokenSecret = process.argv[3];
 // authConfig.key = process.argv[4];
