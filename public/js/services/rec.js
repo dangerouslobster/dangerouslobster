@@ -1,5 +1,7 @@
 angular.module('cleaverApp', [])
 
+// this factory handles requests between the client and server
+
 .factory('Rec', ['$http', function($http) {
   return {
     getRestaurants: function(uniqueID) {
@@ -8,14 +10,13 @@ angular.module('cleaverApp', [])
         restaurantData = data;
       })
       .error(function(){
-        console.log('error getting restaurants');
+        console.error('error getting restaurants');
       });
     },
     
     postLocation: function(data) {
       $http.post('/location', data)
     },
-
     restaurants: function() { return restaurantData; };
   }
 }]);
