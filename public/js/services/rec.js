@@ -2,12 +2,20 @@ angular.module('cleaverApp', [])
 
 .factory('Rec', ['$http', function($http) {
   return {
-    get : function() {
-      return $http.get('/api/uniqueID');
+    getRestaurants: function(uniqueID) {
+      var promise = $http.get('/api/' + uniqueID)
+      .success(function(data, status, config, headers){
+        restaurantData = data;
+      })
+      .error(function(){
+        console.log('error getting restaurants');
+      });
+    },
+    
+    postLocation: function(data) {
+      $http.post('/location', data)
     },
 
-    create : function(data) {
-      return $http.post('/api/uniqueID', data);
-    }
+    restaurants: function() { return restaurantData; };
   }
 }]);
