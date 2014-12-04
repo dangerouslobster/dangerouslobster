@@ -1,6 +1,6 @@
 # Project Name
 
-> Pithy project description
+<!-- > Pithy project description -->
 Cut to the chase when choosing a place to eat.
 
 ## Team
