@@ -5,7 +5,7 @@
     "font-awesome": "latest",
     "animate.css": "latest",
     "angular": "latest",
-    "angular-route": "latest",
-    "semantic": "~1.1.2"
+    "semantic": "~1.1.2",
+    "angular-ui-router": "~0.2.13"
   }
 }
