@@ -1,4 +1,4 @@
-# Project Name
+# Cleaver
 
 <!-- > Pithy project description -->
 Cut to the chase when choosing a place to eat.
