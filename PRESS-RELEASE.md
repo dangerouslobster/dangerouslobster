@@ -17,30 +17,29 @@ Once the project moves into development, the press release can be used as a touc
  -->
 
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+<!-- > Name the product in a way the reader (i.e. your target customers) will understand. -->
 Rural Knife
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+<!-- > Describe who the market for the product is and what benefit they get. One sentence only underneath the title. -->
 Cut to the chase when choosing a place to eat.
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-  Rural Knife lets you and you friends quickly choose a place to eat.
+<!-- > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good. -->
+Rural Knife lets you and you friends quickly choose a place to eat.
 ## Problem ##
-  > Describe the problem your product solves.
-  Have you ever tried to choose a place to eat as a group, but no one volunteers a suggestion but happily shoots down others'?
+<!-- > Describe the problem your product solves. -->
+Have you ever tried to choose a place to eat as a group, but no one volunteers a suggestion but happily shoots down others'?
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
-  Rural Knife suggests highly-rated local restaurants and lets you veto specific cuisines or establishments.
+<!-- > Describe how your product elegantly solves the problem. -->
+<!-- Rural Knife suggests highly-rated local restaurants and lets you veto specific cuisines or establishments. -->
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
-  "This is a real pain point in my life. I'm going to use this app from now until the end of time."
-  - Valentyn B.
+<!-- > A quote from a spokesperson in your company. -->
+"This is a real pain point in my life. I'm going to use this app from now until the end of time." -Valentyn B.
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-  The delicious results are just a click away.
+<!-- > Describe how easy it is to get started. -->
+The delicious results are just a click away.
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-  "My friends never know what they want to eat, but are always willing to shut down my food suggestions. Now, with RuralKnife, I’m never hungry and never rejected. It feels good, like really good."
+<!-- > Provide a quote from a hypothetical customer that describes how they experienced the benefit. -->
+"My friends never know what they want to eat, but are always willing to shut down my food suggestions. Now, with RuralKnife, I’m never hungry and never rejected. It feels good, like really good."
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
-  Check out Rural Knife today!
+<!-- > Wrap it up and give pointers where the reader should go next. -->
+Check out Rural Knife today!
