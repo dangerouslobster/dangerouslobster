@@ -1,9 +1,12 @@
-angular.module('cleaverApp', ['ngRoute'])
+angular.module('cleaverApp', ['ui.router'])
 //TODO: Change to ui-router
-.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-  $routeProvider
-    .when('/', {
-      templateUrl: 'views/home.html',
-      controller: 'MainController'
-    })
-}]);
+.config(function($stateProvider, $urlRouteProvider) {
+  $urlRouteProvider.otherwise("/");
+
+  $stateProvider
+    .state('home', {
+    	templateUrl: 'views/home.html',
+    	controller: 'MainController',
+    	url: '/'
+    });
+});
