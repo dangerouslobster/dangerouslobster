@@ -1,5 +1,5 @@
 {
-  "name": "starter-node-angular",
+  "name": "cleaver",
   "main": "server.js",
   "dependencies": {
     "body-parser": "~1.4.2",
