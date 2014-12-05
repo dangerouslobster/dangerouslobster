@@ -1,9 +1,7 @@
 var OAuth = require('oauth').OAuth;
-var querystr = require('querystring');
+var queryStr = require('querystring');
 
-
-
-var urltemplate = "http://api.yelp.com/v2/search?";
+var urlTemplate = "http://api.yelp.com/v2/search?";
 /*
 Client for sending YelpAPI requests.
 
@@ -17,7 +15,7 @@ Client for sending YelpAPI requests.
 }
 
 */
-function YelpClient(authConfig){
+var YelpClient = function(authConfig){
   this.auth = new OAuth(null, null, authConfig.key, authConfig.secret, "1.0", null, 'HMAC-SHA1');
   this.OAuthToken = authConfig.OAuthToken;
   this.OAuthTokenSecret = authConfig.OAuthTokenSecret;
@@ -33,7 +31,7 @@ Refer to Yelp API docs. See example at end of file
 
 */
 YelpClient.prototype.searchStuff = function(params, cb){
-  this.auth.get(urltemplate + querystr.stringify(params),
+  this.auth.get(urlTemplate + queryStr.stringify(params),
     this.OAuthToken,
     this.OAuthTokenSecret,
     function(err, data, res){
@@ -70,7 +68,7 @@ exports.YelpClient = YelpClient;
 //   secret: 'Consumer Secret'
 // };
 
-// // For testing purposes(command line use);
+// For testing purposes(command line use);
 // authConfig.OAuthToken = process.argv[2];
 // authConfig.OAuthTokenSecret = process.argv[3];
 // authConfig.key = process.argv[4];
