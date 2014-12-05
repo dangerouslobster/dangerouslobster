@@ -8,4 +8,5 @@ angular.module('cleaver.controllers', [])
     }
   }
   // $scope.get = getRestaurants($scope.location);
+
 });
