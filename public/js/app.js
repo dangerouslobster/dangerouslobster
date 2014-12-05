@@ -1,4 +1,7 @@
-angular.module('cleaverApp', ['ui.router'])
+angular.module('cleaverApp',
+	['ui.router',
+     'cleaver.controllers'
+	])
 //TODO: Change to ui-router
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/");
