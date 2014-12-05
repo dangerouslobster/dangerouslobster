@@ -53,7 +53,7 @@ Subroutine for building recommendations
 @param {object} data The data returned from Yelp
 @param {res} res The response from Yelp
 */
-var subCallback = function(cb, err, data, res){
+var gatherRecs = function(cb, err, data, res){
   if(!err){
     this.lat = data.region.center.latitude;
     this.longi = data.region.center.longitude;
@@ -77,7 +77,7 @@ Builds the recommendation queue.
 */
 RecSession.prototype.buildRecommendation = function(cb){
 
-  this.getYelpData(subCallback.bind(this, cb));
+  this.getYelpData(gatherRecs.bind(this, cb));
 };
 /*
 Returns recs
