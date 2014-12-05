@@ -15,8 +15,8 @@ Getter for session model.
 
 @returns {recSession} RecSession instance
 */
-RecSessions.prototype.getSession = function(id) {
-  return this.sessions[id];
+RecSessions.prototype.getSession = function(uid) {
+  return this.sessions[uid];
 };
 
 /*
@@ -26,7 +26,7 @@ Adds session model to collection.
 @param{recSession} RecSession instance to add to collection
 */
 RecSessions.prototype.addSession = function(session){
-  this.sessions[session.id] = session;
+  this.sessions[session.uniqueID] = session;
 };
 
-exports.RecSessions = RecSessions;
+module.exports = RecSessions;
