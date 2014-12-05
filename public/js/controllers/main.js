@@ -10,14 +10,14 @@ angular.module('cleaver.controllers', [])
     }
   }
 
-  $scope.getRestaurantID = function(restID) {
-    alert('restaurant id is: ' + restID);
-  };
+  // $scope.getRestaurantID = function(restID) {
+  //   alert('restaurant id is: ' + restID);
+  // };
 
-  $scope.getCategory = function(category) {
-    alert('category is: ' + category);
-    // alert('category index is: ' + catIndex);
-    // alert('category: ' + $scope.data.recs[restID].categories[catIndex][1]);
-  };
+  // $scope.getCategory = function(category) {
+  //   alert('category is: ' + category);
+  //   // alert('category index is: ' + catIndex);
+  //   // alert('category: ' + $scope.data.recs[restID].categories[catIndex][1]);
+  // };
 
 });
