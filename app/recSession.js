@@ -68,7 +68,16 @@ RecSession.prototype.buildRecommendation = function(cb){
 
       for(var i=0;i<this.numRecs && this.recQueue.length > 0;i++){
         var current = this.recQueue.pop();
-        if(!this.vetoes[current.url]){
+        var vetoed = false;
+        if(this.vetoes[current.url]){
+          vetoed = true;
+        };
+        for(var j=0;j++;j<current.categories.length){
+          if(this.vetoes[current.categories[i]]){
+            vetoed = true;
+          }
+        };
+        if(!vetoed){
           this.recommendations[current.url] = current;
         }else{
           i --;
@@ -86,7 +95,9 @@ RecSession.prototype.getRecs = function(){
   return this.recommendations;
 };
 
+RecSession.prototype.veto = function(command) {
 
+};
 module.exports = RecSession;
 
 // (location, uid, numRecommendations)
