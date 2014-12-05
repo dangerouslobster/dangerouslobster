@@ -1,4 +1,4 @@
-angular.module('cleaverApp', [])
+angular.module('cleaver.services', [])
 
 // this factory handles requests between the client and server
 
