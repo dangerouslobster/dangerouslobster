@@ -13,35 +13,34 @@ angular.module('cleaver.services', [])
       data: { location: location }
     }).then(function(resp) {
       id = resp.data.uniqueID;
-      console.log('added location', resp);
+      console.log('added location: \n', resp);
     });
   };
 
-  var getRestaurants = function(uniqueID) {
+  var getRestaurants = function() {
     return $http({
       method: 'GET',
-      url: '/' + uniqueID
+      url: '/' + id
     })
     .then(function (resp) {
-      console.log('get restaurants: ', resp.data);
-      restaurants = resp.data;
+      console.log('get restaurants: \n', resp);
     });
   };
 
-  var vetoCategory = function(uniqueID, category) {
+  var vetoCategory = function(category) {
     return $http({
       method: 'POST',
-      url: '/' + uniqueID,
+      url: '/' + id,
       data: {key: "category", val: category}
     }).then(function(resp) {
       console.log('vetoed category: ', resp);
     });
   };
 
-  var vetoRestaurant = function(uniqueID, restaurantID) {
+  var vetoRestaurant = function(restaurantID) {
     return $http({
       method: 'POST',
-      url: '/' + uniqueID,
+      url: '/' + id,
       data: {key: "id", val: restaurantID}
     }).then(function(resp) {
       console.log('vetoed restaurant: ', resp);
@@ -53,7 +52,6 @@ angular.module('cleaver.services', [])
     postLocation: postLocation,
     vetoRestaurant: vetoRestaurant,
     vetoCategory: vetoCategory,
-    restaurants: restaurants,
     id: id
   };
 });
