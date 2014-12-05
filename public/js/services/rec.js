@@ -27,11 +27,11 @@ angular.module('cleaver.services', [])
     });
   };
 
-  // var vetoFood = function(food) {
+  // var vetoFood = function(category) {
   //   return $http({
   //     method: 'POST',
   //     url: '/api/',
-  //     data: { food: food } // ???
+  //     data: { category: category } // ???
   //   }).then(function(resp) {
   //     console.log('vetoed food: ', resp);
   //   });
@@ -41,7 +41,7 @@ angular.module('cleaver.services', [])
   //   return $http({
   //     method: 'POST',
   //     url: '/api/',
-  //     data: { restaurant: restaurant } // ???
+  //     data: { id: restaurant } // ???
   //   }).then(function(resp) {
   //     console.log('vetoed restaurant: ', resp);
   //   });
