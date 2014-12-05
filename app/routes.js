@@ -18,10 +18,14 @@ var validateSession = function(req, res, cb) {
 
 module.exports = function(app) {
   app.post('/location', function(req, res) {
-    var recSession = new RecSession(req.body.location, utils.generateUID());
+    // 3rd arg is num of recs to return.
+    var recSession = new RecSession(req.body.location, utils.generateUID(), 5);
     recSessions.addSession(recSession);
-    recSession.getYelpData(function(err, data, yelpRes) {
-      res.json(recSession);
+    recSession.buildRecommendation(function(recs){
+      res.json({
+        uniqueID: recSession.uniqueID,
+        recs: recs
+      })
     });
   });
 
