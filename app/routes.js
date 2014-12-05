@@ -21,24 +21,18 @@ module.exports = function(app) {
     // 3rd arg is num of recs to return.
     var recSession = new RecSession(req.body.location, utils.generateUID(), 5);
     recSessions.addSession(recSession);
-    recSession.buildRecommendation(function(recs){
+    recSession.getYelpData(function(err, data, res){
       res.json({
         uniqueID: recSession.uniqueID,
-        recs: recs
+        yelpData: data
       })
     });
   });
-
+// Sends back uniqueID string
   app.get('/:uid', function(req, res) {
     validateSession(req, res, function(_req, _res, thisSession) {
-      _res.json(thisSession.recommendations);
+      _res.send(thisSession.uniqueID);
     });
   });
 
-  app.post('/:uid', function(req, res) {
-    validateSession(req, res, function(_req, _res, thisSession) {
-      thisSession.veto(req.body);
-      _res.json(thisSession.recommendations);
-    });
-  });
 };
