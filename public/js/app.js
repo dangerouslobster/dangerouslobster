@@ -15,7 +15,7 @@ angular.module('cleaverApp',
     })
     .state('rec', {
     	templateUrl: 'views/rec.html',
-    	controller: 'RecController',
+    	// controller: 'RecController',
     	url: '/rec'
     });
 });

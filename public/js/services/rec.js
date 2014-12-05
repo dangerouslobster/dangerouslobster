@@ -1,7 +1,5 @@
 angular.module('cleaver.services', [])
 
-// this factory handles requests between the client and server
-
 .factory('Rec', function($http) {
   var data = {};
 
@@ -13,6 +11,7 @@ angular.module('cleaver.services', [])
     }).then(function(resp) {
       data.id = resp.data.uniqueID;
       data.recs = resp.data.recs;
+      console.log('postLocation: \n', data);
     });
   };
 
@@ -33,6 +32,8 @@ angular.module('cleaver.services', [])
       data: {key: "category", val: category}
     }).then(function(resp) {
       data.recs = resp.data;
+      console.log('vetoCategory: \n', data);
+
     });
   };
 
@@ -43,6 +44,7 @@ angular.module('cleaver.services', [])
       data: {key: "id", val: restaurantID}
     }).then(function(resp) {
       data.recs = resp.data;
+      console.log('vetoRestaurant: \n', data);
     });
   };
 
