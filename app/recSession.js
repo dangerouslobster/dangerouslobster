@@ -12,10 +12,6 @@ Creates an instance of Recommendation Session
 @param {string} uid The randomly generated UID for this session.
 */
 
-var RecSession = function(loc, uid) {
-  this.location = loc;
-  this.uniqueID = uid;
-
 var RecSession = function(loc, uid, numRecs) {
   this.location = loc;
   this.uniqueID = uid;
@@ -140,13 +136,12 @@ module.exports = RecSession;
 module.exports.RecSession = RecSession;
 
 // (location, uid, numRecommendations)
-// // (location, uid, numRecommendations)
-// var testsesh = new RecSession('94103', 0, 3);
-// testsesh.veto({key:'id', val:'crepes-a-go-go-san-francisco-2'})
-// testsesh.buildRecommendation(function(recs){
-//   console.log(Object.keys(recs))
-//   testsesh.veto({key:'id', val:'so-san-francisco-4'})
-//   console.log(Object.keys(testsesh.getRecs()));
-//   testsesh.veto({key:'category', val:'asianfusion'})
-//   console.log(Object.keys(testsesh.getRecs()));
-// })
+var testsesh = new RecSession('94103', 0, 3);
+testsesh.veto({key:'id', val:'crepes-a-go-go-san-francisco-2'});
+testsesh.buildRecommendation(function(recs){
+  console.log(Object.keys(recs))
+  testsesh.veto({key:'id', val:'so-san-francisco-4'})
+  console.log(Object.keys(testsesh.getRecs()));
+  testsesh.veto({key:'category', val:'asianfusion'})
+  console.log(Object.keys(testsesh.getRecs()));
+})
