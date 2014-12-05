@@ -46,43 +46,38 @@ RecSession.prototype.getYelpData = function(cb) {
   }.bind(this));
 };
 /*
+Subroutine for building recommendations
+
+@param {callback} cb The callback to invoke with (recommendations)
+@param {string} err The error returned
+@param {object} data The data returned from Yelp
+@param {res} res The response from Yelp
+*/
+var subCallback = function(cb, err, data, res){
+  if(!err){
+    this.lat = data.region.center.latitude;
+    this.longi = data.region.center.longitude;
+    this.recQueue = data.businesses;
+    this.recQueue.sort(function(a, b){
+      return utils.calculateScore(a) - utils.calculateScore(b);
+    }.bind(this));
+
+    for(var i=0;i<this.numRecs && this.recQueue.length > 0;i++){
+      var current = this.recQueue.pop();
+      this.recommendations[current.id] = current;
+    };
+
+    cb(this.recommendations);
+  }
+};
+/*
 Builds the recommendation queue.
 
 @param {callback} cb The callback to invoke with (recommendations)
 */
 RecSession.prototype.buildRecommendation = function(cb){
-  var subCallback = function(err, data, res){
-    if(!err){
-      this.lat = data.region.center.latitude;
-      this.longi = data.region.center.longitude;
-      this.recQueue = data.businesses;
-      this.recQueue.sort(function(a, b){
-        return utils.calculateScore(a) - utils.calculateScore(b);
-      }.bind(this));
 
-      for(var i=0;i<this.numRecs && this.recQueue.length > 0;i++){
-        var current = this.recQueue.pop();
-        var vetoed = false;
-        if(this.vetoes[current.id]){
-          vetoed = true;
-        };
-        for(var j=0;j++;j<current.categories.length){
-          if(this.vetoes[current.categories[i]]){
-            vetoed = true;
-          }
-        };
-        if(!vetoed){
-          this.recommendations[current.id] = current;
-        }else{
-          i --;
-        }
-      }
-
-      cb(this.recommendations);
-    }
-  };
-
-  this.getYelpData(subCallback.bind(this));
+  this.getYelpData(subCallback.bind(this, cb));
 };
 /*
 Returns recs
