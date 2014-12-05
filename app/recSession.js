@@ -127,9 +127,9 @@ RecSession.prototype.veto = function(command) {
 };
 module.exports = RecSession;
 
-// Example usage of RecSession
+// // Example usage of RecSession
 // // (location, uid, numRecommendations)
-// var testsesh = new RecSession('94103', 0, 3);
+// var testsesh = new RecSession('55042', 0, 3);
 // testsesh.veto({key:'id', val:'crepes-a-go-go-san-francisco-2'})
 // testsesh.buildRecommendation(function(recs){
 //   console.log(Object.keys(recs))
