@@ -1,6 +1,8 @@
 var authConfig = require('../config/authConfig.js');
 var yelp = require('./yelpApi.js');
-
+var Heap = require('heap');
+var utils = require('./utils.js');
+var fs = require('fs');
 /*
 Creates an instance of Recommendation Session
 
@@ -13,22 +15,13 @@ Creates an instance of Recommendation Session
 var RecSession = function(loc, uid) {
   this.location = loc;
   this.uniqueID = uid;
-};
 
-/*
-Vetoes a restaurant or food category, removing it from the recommendations.
-
-@param {object} The veto request. Should have key, val properties, where the key is either id or category.
-*/
-
-RecSession.prototype.veto = function(whatToVeto) {
-  if (whatToVeto.key === 'id') {
-    // TODO
-  } else if (whatToVeto.key === 'category') {
-    // TODO
-  } else {
-    console.error('Error: invalid argument');
-  }
+var RecSession = function(loc, uid, numRecs) {
+  this.location = loc;
+  this.uniqueID = uid;
+  this.recommendations = {};
+  this.vetoes = {};
+  this.numRecs = numRecs;
 };
 
 /*
@@ -56,4 +49,48 @@ RecSession.prototype.getYelpData = function(cb) {
   }.bind(this));
 };
 
+/*
+Builds the recommendation queue.
+
+@param {callback} cb The callback to invoke with (recommendations)
+*/
+RecSession.prototype.buildRecommendation = function(cb){
+  var subCallback = function(err, data, res){
+    if(!err){
+      fs.appendFileSync('logs.txt', JSON.stringify(data))
+
+      this.lat = data.region.center.latitude;
+      this.longi = data.region.center.longitude;
+      this.recQueue = data.businesses;
+      this.recQueue.sort(function(a, b){
+        return utils.calculateScore(this.lat, this.longi, a) - utils.calculateScore(this.lat, this.longi, b);
+      }.bind(this));
+
+      for(var i=0;i<this.numRecs && this.recQueue.length > 0;i++){
+        var current = this.recQueue.pop();
+        if(!this.vetoes[current.url]){
+          this.recommendations[current.url] = current;
+        }else{
+          i --;
+        }
+      }
+
+      cb(this.recommendations);
+    }
+  };
+
+  this.getYelpData(subCallback.bind(this));
+};
+
+RecSession.prototype.getRecs = function(){
+  return this.recommendations;
+};
+
+
 module.exports = RecSession;
+
+// (location, uid, numRecommendations)
+// var testsesh = new RecSession('94103', 0, 3);
+// testsesh.buildRecommendation(function(recs){
+//   console.log(Object.keys(recs))
+// })
