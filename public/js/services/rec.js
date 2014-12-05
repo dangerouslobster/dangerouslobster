@@ -2,9 +2,8 @@ angular.module('cleaver.services', [])
 
 // this factory handles requests between the client and server
 
-// .factory('Rec', ['$http', '$routeParams', function($http) {
 .factory('Rec', function($http) {
-  var id;
+  var data = {};
 
   var postLocation = function(location) {
     return $http({
@@ -12,38 +11,38 @@ angular.module('cleaver.services', [])
       url: '/location',
       data: { location: location }
     }).then(function(resp) {
-      id = resp.data.uniqueID;
-      console.log('added location: \n', resp);
+      data.id = resp.data.uniqueID;
+      data.recs = resp.data.recs;
     });
   };
 
   var getRestaurants = function() {
     return $http({
       method: 'GET',
-      url: '/' + id
+      url: '/' + data.id
     })
     .then(function (resp) {
-      console.log('get restaurants: \n', resp);
+      data.recs = resp.data;
     });
   };
 
   var vetoCategory = function(category) {
     return $http({
       method: 'POST',
-      url: '/' + id,
+      url: '/' + data.id,
       data: {key: "category", val: category}
     }).then(function(resp) {
-      console.log('vetoed category: ', resp);
+      data.recs = resp.data;
     });
   };
 
   var vetoRestaurant = function(restaurantID) {
     return $http({
       method: 'POST',
-      url: '/' + id,
+      url: '/' + data.id,
       data: {key: "id", val: restaurantID}
     }).then(function(resp) {
-      console.log('vetoed restaurant: ', resp);
+      data.recs = resp.data;
     });
   };
 
@@ -52,7 +51,6 @@ angular.module('cleaver.services', [])
     postLocation: postLocation,
     vetoRestaurant: vetoRestaurant,
     vetoCategory: vetoCategory,
-    id: id
+    data: data
   };
 });
-// }]);
