@@ -10,6 +10,10 @@ Creates an instance of Recommendation Session
 @this {RecSession}
 @param {string} loc The user-input location (zip code, address, etc).
 @param {string} uid The randomly generated UID for this session.
+<<<<<<< HEAD
+=======
+@param {number} numRecs number of recommendations to return.
+>>>>>>> 373016a39406ec7f9c5c1521fd89c526b934b7dd
 */
 
 var RecSession = function(loc, uid, numRecs) {
@@ -32,7 +36,11 @@ RecSession.prototype.getYelpData = function(cb) {
   var yelpClient = new yelp.YelpClient(authConfig);
   var searchParams = {
     sort: 1,
+<<<<<<< HEAD
     radius_filter: 5000,
+=======
+    radius_filter: 1000,
+>>>>>>> 373016a39406ec7f9c5c1521fd89c526b934b7dd
     location: this.location
   };
 
@@ -45,7 +53,10 @@ RecSession.prototype.getYelpData = function(cb) {
     cb(err, data, res);
   }.bind(this));
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 373016a39406ec7f9c5c1521fd89c526b934b7dd
 /*
 Builds the recommendation queue.
 
@@ -135,7 +146,7 @@ module.exports = RecSession;
 
 // // (location, uid, numRecommendations)
 // var testsesh = new RecSession('94103', 0, 3);
-// testsesh.veto({key:'id', val:'crepes-a-go-go-san-francisco-2'});
+// testsesh.veto({key:'id', val:'crepes-a-go-go-san-francisco-2'})
 // testsesh.buildRecommendation(function(recs){
 //   console.log(Object.keys(recs))
 //   testsesh.veto({key:'id', val:'so-san-francisco-4'})
