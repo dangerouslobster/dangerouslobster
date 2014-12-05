@@ -70,8 +70,6 @@ Builds the recommendation queue.
 RecSession.prototype.buildRecommendation = function(cb){
   var subCallback = function(err, data, res){
     if(!err){
-      fs.appendFileSync('logs.txt', JSON.stringify(data))
-
       this.lat = data.region.center.latitude;
       this.longi = data.region.center.longitude;
       this.recQueue = data.businesses;
@@ -82,7 +80,8 @@ RecSession.prototype.buildRecommendation = function(cb){
       for(var i=0;i<this.numRecs && this.recQueue.length > 0;i++){
         var current = this.recQueue.pop();
         var vetoed = false;
-        if(this.vetoes[current.url]){
+        console.log(this.vetoes)
+        if(this.vetoes[current.id]){
           vetoed = true;
         };
         for(var j=0;j++;j<current.categories.length){
@@ -91,7 +90,7 @@ RecSession.prototype.buildRecommendation = function(cb){
           }
         };
         if(!vetoed){
-          this.recommendations[current.url] = current;
+          this.recommendations[current.id] = current;
         }else{
           i --;
         }
@@ -103,18 +102,28 @@ RecSession.prototype.buildRecommendation = function(cb){
 
   this.getYelpData(subCallback.bind(this));
 };
+/*
+Returns recs
 
+@returns {object} Object of recommendations keyed by id.
+*/
 RecSession.prototype.getRecs = function(){
   return this.recommendations;
 };
+/*
+Adds veto to session
 
+@param {object} Takes command object of form {key: 'id'|'object', val: valueToVeto}
+*/
 RecSession.prototype.veto = function(command) {
-
+  this.vetoes[command.val] = true;
 };
 
 module.exports.RecSession = RecSession;
-// (location, uid, numRecommendations)
+
+// // (location, uid, numRecommendations)
 // var testsesh = new RecSession('94103', 0, 3);
+// testsesh.veto({key:'id', val:'crepes-a-go-go-san-francisco-2'})
 // testsesh.buildRecommendation(function(recs){
 //   console.log(Object.keys(recs))
 // })
