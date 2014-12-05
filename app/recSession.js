@@ -23,23 +23,6 @@ var RecSession = function(loc, uid, numRecs) {
 };
 
 /*
-Vetoes a restaurant or food category, removing it from the recommendations.
-
-@param {string} foorOrRest Set to either "food" or "rest", this specifies what to veto.
-@param {string} value The name of the food or restaurant to veto.
-*/
-
-RecSession.prototype.veto = function(foodOrRest, value) {
-  if (foodOrRestaurant === 'food') {
-    console.log('vetoing food: ', value);
-  } else if (foodOrRestaurant === 'rest') {
-    console.log('vetoing restaurant: ', value);
-  } else {
-    console.error('error: invalid argument');
-  }
-};
-
-/*
 Gets the restaurant data from Yelp and saves it in the instance of RecSession.
 
 @this {RecSession}
