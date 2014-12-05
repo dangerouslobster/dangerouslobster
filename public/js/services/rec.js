@@ -9,7 +9,7 @@ angular.module('cleaver.services', [])
   var postLocation = function(location) {
     return $http({
       method: 'POST',
-      url: '/api/location',
+      url: '/location',
       data: { location: location }
     }).then(function(resp) {
       console.log('added location', resp);
@@ -27,29 +27,31 @@ angular.module('cleaver.services', [])
     });
   };
 
-  var vetoFood = function(food) {
-    return $http({
-      method: 'POST',
-      url: '/api/',
-      data: { food: food } // ???
-    }).then(function(resp) {
-      console.log('vetoed food: ', resp);
-    });
-  };
+  // var vetoFood = function(food) {
+  //   return $http({
+  //     method: 'POST',
+  //     url: '/api/',
+  //     data: { food: food } // ???
+  //   }).then(function(resp) {
+  //     console.log('vetoed food: ', resp);
+  //   });
+  // };
 
-  var vetoRestaurant = function(restaurant) {
-    return $http({
-      method: 'POST',
-      url: '/api/',
-      data: { restaurant: restaurant } // ???
-    }).then(function(resp) {
-      console.log('vetoed restaurant: ', resp);
-    });
-  };
+  // var vetoRestaurant = function(restaurant) {
+  //   return $http({
+  //     method: 'POST',
+  //     url: '/api/',
+  //     data: { restaurant: restaurant } // ???
+  //   }).then(function(resp) {
+  //     console.log('vetoed restaurant: ', resp);
+  //   });
+  // };
 
   return {
     getRestaurants: getRestaurants,
-    addLocation: addLocation,
+    postLocation: postLocation,
+    // vetoRestaurant: vetoRestaurant,
+    // vetoFood: vetoFood,
     restaurants: restaurants
   };
 });
