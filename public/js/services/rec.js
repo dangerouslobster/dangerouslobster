@@ -12,49 +12,49 @@ angular.module('cleaver.services', [])
       url: '/location',
       data: { location: location }
     }).then(function(resp) {
-      id = resp.data.locationData.uniqueID;
+      id = resp.data.uniqueID;
       console.log('added location', resp);
     });
   };
 
-  // var getRestaurants = function(uniqueID) {
-  //   return $http({
-  //     method: 'GET',
-  //     url: '/api/' + uniqueID
-  //   })
-  //   .then(function (resp) {
-  //     console.log('get restaurants: ', resp.data);
-  //     restaurants = resp.data;
-  //   });
-  // };
-
-  var vetoFood = function(sessionId, category) {
+  var getRestaurants = function(uniqueID) {
     return $http({
-      method: 'POST',
-      url: '/' + sessionId,
-      data: { category: category } // ???
-    }).then(function(resp) {
-      console.log('vetoed food: ', resp);
+      method: 'GET',
+      url: '/' + uniqueID
+    })
+    .then(function (resp) {
+      console.log('get restaurants: ', resp.data);
+      restaurants = resp.data;
     });
   };
 
-  var vetoRestaurant = function(sessionId, restaurant) {
+  var vetoCategory = function(uniqueID, category) {
     return $http({
       method: 'POST',
-      url: '/' + sessionId,
-      data: { id: restaurant } // ???
+      url: '/' + uniqueID,
+      data: {key: "category", val: category}
+    }).then(function(resp) {
+      console.log('vetoed category: ', resp);
+    });
+  };
+
+  var vetoRestaurant = function(uniqueID, restaurantID) {
+    return $http({
+      method: 'POST',
+      url: '/' + uniqueID,
+      data: {key: "id", val: restaurantID}
     }).then(function(resp) {
       console.log('vetoed restaurant: ', resp);
     });
   };
 
   return {
-    // getRestaurants: getRestaurants,
+    getRestaurants: getRestaurants,
     postLocation: postLocation,
     vetoRestaurant: vetoRestaurant,
-    vetoFood: vetoFood,
+    vetoCategory: vetoCategory,
+    restaurants: restaurants,
     id: id
-    // restaurants: restaurants
   };
 });
 // }]);
