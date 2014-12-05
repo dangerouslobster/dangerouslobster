@@ -4,8 +4,8 @@
       <div class='ui segment'>
         <h1>Cleaver</h1>
         <div class="ui fluid icon input">
-          <input type="text" placeholder="Enter location...">
-          <i class="search icon"></i>
+          <input ng-model="location" type="text" ng-keypress="enter($event, location)" placeholder="Enter location...">
+          <i ng-click="postLocation(location)" class="search icon"></i>
         </div>
       </div>
     </div>
