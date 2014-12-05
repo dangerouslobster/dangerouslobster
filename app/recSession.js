@@ -18,17 +18,16 @@ var RecSession = function(loc, uid) {
 /*
 Vetoes a restaurant or food category, removing it from the recommendations.
 
-@param {string} foorOrRest Set to either "food" or "rest", this specifies what to veto.
-@param {string} value The name of the food or restaurant to veto.
+@param {object} The veto request. Should have key, val properties, where the key is either id or category.
 */
 
-RecSession.prototype.veto = function(foodOrRest, value) {
-  if (foodOrRestaurant === 'food') {
-    console.log('vetoing food: ', value);
-  } else if (foodOrRestaurant === 'rest') {
-    console.log('vetoing restaurant: ', value);
+RecSession.prototype.veto = function(whatToVeto) {
+  if (whatToVeto.key === 'id') {
+    // TODO
+  } else if (whatToVeto.key === 'category') {
+    // TODO
   } else {
-    console.error('error: invalid argument');
+    console.error('Error: invalid argument');
   }
 };
 
@@ -43,7 +42,7 @@ RecSession.prototype.getYelpData = function(cb) {
   var yelpClient = new yelp.YelpClient(authConfig);
   var searchParams = {
     sort: 1,
-    radius_filter: 1000,
+    radius_filter: 5000,
     location: this.location
   };
 
@@ -57,4 +56,4 @@ RecSession.prototype.getYelpData = function(cb) {
   }.bind(this));
 };
 
-module.exports.RecSession = RecSession;
+module.exports = RecSession;
