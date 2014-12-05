@@ -22,6 +22,7 @@ var RecSession = function(loc, uid, numRecs) {
   this.recommendations = {};
   this.vetoes = {};
   this.numRecs = numRecs;
+  this.recQueue = [];
 };
 
 /*
@@ -67,7 +68,6 @@ RecSession.prototype.buildRecommendation = function(cb){
       for(var i=0;i<this.numRecs && this.recQueue.length > 0;i++){
         var current = this.recQueue.pop();
         var vetoed = false;
-        console.log(this.vetoes)
         if(this.vetoes[current.id]){
           vetoed = true;
         };
@@ -103,7 +103,37 @@ Adds veto to session
 @param {object} Takes command object of form {key: 'id'|'object', val: valueToVeto}
 */
 RecSession.prototype.veto = function(command) {
+  // Refactor using lodash later.
   this.vetoes[command.val] = true;
+  if(command.key === 'id'){
+    delete this.recommendations[command.val];
+  }else{
+    var keys = Object.keys(this.recommendations);
+    for(var i=0;i<keys.length;i++){
+      if(this.recommendations[keys[i]].categories[0].indexOf(command.val) > -1){
+        delete this.recommendations[keys[i]];
+      }
+    }
+  };
+  for(var i=0;i<this.numRecs && this.recQueue.length > 0 && Object.keys(this.recommendations).length < this.numRecs;i++){
+    var current = this.recQueue.pop();
+    var vetoed = false;
+    if(this.vetoes[current.id]){
+      vetoed = true;
+    };
+    // First in array is food-related;
+    for(var j=0;j++;j<current.categories[0].length){
+      if(this.vetoes[current.categories[0][i]]){
+        vetoed = true;
+      }
+    };
+    if(!vetoed){
+      this.recommendations[current.id] = current;
+    }else{
+      i --;
+    }
+  };
+
 };
 module.exports = RecSession;
 
@@ -115,4 +145,8 @@ module.exports.RecSession = RecSession;
 // testsesh.veto({key:'id', val:'crepes-a-go-go-san-francisco-2'})
 // testsesh.buildRecommendation(function(recs){
 //   console.log(Object.keys(recs))
+//   testsesh.veto({key:'id', val:'so-san-francisco-4'})
+//   console.log(Object.keys(testsesh.getRecs()));
+//   testsesh.veto({key:'category', val:'asianfusion'})
+//   console.log(Object.keys(testsesh.getRecs()));
 // })
