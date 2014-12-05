@@ -4,6 +4,7 @@
   "dependencies": {
     "body-parser": "~1.4.2",
     "express": "~4.5.1",
+    "heap": "^0.2.5",
     "method-override": "~2.0.2",
     "mongoose": "~3.8.0",
     "morgan": "^1.5.0",

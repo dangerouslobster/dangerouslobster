@@ -1,6 +1,7 @@
 var authConfig = require('../config/authConfig.js');
 var yelp = require('./yelpApi.js');
-
+var utils = require('./utils.js');
+var fs = require('fs');
 /*
 Creates an instance of Recommendation Session
 
@@ -8,27 +9,16 @@ Creates an instance of Recommendation Session
 @this {RecSession}
 @param {string} loc The user-input location (zip code, address, etc).
 @param {string} uid The randomly generated UID for this session.
+@param {number} numRecs number of recommendations to return.
 */
 
-var RecSession = function(loc, uid) {
+var RecSession = function(loc, uid, numRecs) {
   this.location = loc;
   this.uniqueID = uid;
-};
-
-/*
-Vetoes a restaurant or food category, removing it from the recommendations.
-
-@param {object} The veto request. Should have key, val properties, where the key is either id or category.
-*/
-
-RecSession.prototype.veto = function(whatToVeto) {
-  if (whatToVeto.key === 'id') {
-    // TODO
-  } else if (whatToVeto.key === 'category') {
-    // TODO
-  } else {
-    console.error('Error: invalid argument');
-  }
+  this.recommendations = {};
+  this.vetoes = {};
+  this.numRecs = numRecs;
+  this.recQueue = [];
 };
 
 /*
@@ -55,5 +45,96 @@ RecSession.prototype.getYelpData = function(cb) {
     cb(err, data, res);
   }.bind(this));
 };
+/*
+Subroutine for building recommendations
 
+@param {callback} cb The callback to invoke with (recommendations)
+@param {string} err The error returned
+@param {object} data The data returned from Yelp
+@param {res} res The response from Yelp
+*/
+var gatherRecs = function(cb, err, data, res){
+  if(!err){
+    this.lat = data.region.center.latitude;
+    this.longi = data.region.center.longitude;
+    this.recQueue = data.businesses;
+    this.recQueue.sort(function(a, b){
+      return utils.calculateScore(a) - utils.calculateScore(b);
+    }.bind(this));
+
+    for(var i=0;i<this.numRecs && this.recQueue.length > 0;i++){
+      var current = this.recQueue.pop();
+      this.recommendations[current.id] = current;
+    };
+
+    cb(this.recommendations);
+  }
+};
+/*
+Builds the recommendation queue.
+
+@param {callback} cb The callback to invoke with (recommendations)
+*/
+RecSession.prototype.buildRecommendation = function(cb){
+
+  this.getYelpData(gatherRecs.bind(this, cb));
+};
+/*
+Returns recs
+
+@returns {object} Object of recommendations keyed by id.
+*/
+RecSession.prototype.getRecs = function(){
+  return this.recommendations;
+};
+/*
+Adds veto to session
+
+@param {object} Takes command object of form {key: 'id'|'object', val: valueToVeto}
+*/
+RecSession.prototype.veto = function(command) {
+  // Refactor using lodash later.
+  this.vetoes[command.val] = true;
+  if(command.key === 'id'){
+    delete this.recommendations[command.val];
+  }else{
+    var keys = Object.keys(this.recommendations);
+    for(var i=0;i<keys.length;i++){
+      if(this.recommendations[keys[i]].categories[0].indexOf(command.val) > -1){
+        delete this.recommendations[keys[i]];
+      }
+    }
+  };
+  for(var i=0;i<this.numRecs && this.recQueue.length > 0 && Object.keys(this.recommendations).length < this.numRecs;i++){
+    var current = this.recQueue.pop();
+    var vetoed = false;
+    if(this.vetoes[current.id]){
+      vetoed = true;
+    };
+    // First in array is food-related;
+    for(var j=0;j++;j<current.categories[0].length){
+      if(this.vetoes[current.categories[0][i]]){
+        vetoed = true;
+      }
+    };
+    if(!vetoed){
+      this.recommendations[current.id] = current;
+    }else{
+      i --;
+    }
+  };
+
+};
 module.exports = RecSession;
+
+// Example usage of RecSession
+// // (location, uid, numRecommendations)
+// var testsesh = new RecSession('94103', 0, 3);
+// testsesh.veto({key:'id', val:'crepes-a-go-go-san-francisco-2'})
+// testsesh.buildRecommendation(function(recs){
+//   console.log(Object.keys(recs))
+//   testsesh.veto({key:'id', val:'so-san-francisco-4'})
+//   console.log(Object.keys(testsesh.getRecs()));
+//   testsesh.veto({key:'category', val:'asianfusion'})
+//   console.log(Object.keys(testsesh.getRecs()));
+// })
