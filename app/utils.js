@@ -17,7 +17,7 @@ module.exports = {
     };
     return Math.log(x) / Math.log(base);
   },
-  calculateScore: function(lat, longit, data){
+  calculateScore: function(data){
     // var distance = module.exports.calculateDistance(longit, lat, data.location.coordinate.longitude, data.location.coordinate.latitude );
     // Multiplies log of review_count by rating^1.5, divides by distance from location.
     return  module.exports.getBaseLog(data.review_count, 10) * Math.pow(data.rating, 1.5);

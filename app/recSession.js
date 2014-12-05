@@ -1,6 +1,5 @@
 var authConfig = require('../config/authConfig.js');
 var yelp = require('./yelpApi.js');
-var Heap = require('heap');
 var utils = require('./utils.js');
 var fs = require('fs');
 /*
@@ -58,7 +57,7 @@ RecSession.prototype.buildRecommendation = function(cb){
       this.longi = data.region.center.longitude;
       this.recQueue = data.businesses;
       this.recQueue.sort(function(a, b){
-        return utils.calculateScore(this.lat, this.longi, a) - utils.calculateScore(this.lat, this.longi, b);
+        return utils.calculateScore(a) - utils.calculateScore(b);
       }.bind(this));
 
       for(var i=0;i<this.numRecs && this.recQueue.length > 0;i++){
