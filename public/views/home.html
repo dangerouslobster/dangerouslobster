@@ -7,6 +7,14 @@
           <input ng-model="location" type="text" ng-keypress="enter($event, location)" placeholder="Enter location...">
           <i ng-click="postLocation(location)" class="search icon"></i>
         </div>
+        <!-- test code -->
+        <div ng-repeat="restaurant in data.recs" ng-click="vetoRestaurant(restaurant.id)" style="background-color:orange;margin: 10px;">
+          <p>{{restaurant.name}}</p>
+          <span>
+            <p ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[1]); $event.stopPropagation();" style="background-color:yellow;margin: 10px;">{{category[0]}}</p>
+          </span>
+        </div>
+        <!-- end test code -->
       </div>
     </div>
   </div>
