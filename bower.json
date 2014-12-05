@@ -2,10 +2,6 @@
   "name": "cleaver",
   "version": "1.0.0",
   "dependencies": {
-    "font-awesome": "latest",
-    "animate.css": "latest",
-    "angular": "latest",
-    "semantic": "~1.1.2",
-    "angular-ui-router": "~0.2.13"
+    "semantic": "~1.1.2"
   }
 }
