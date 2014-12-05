@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 angular.module('cleaver.controllers', [])
 
 .controller('MainController', function($scope, $stateParams, Rec) {
@@ -6,4 +7,10 @@ angular.module('cleaver.controllers', [])
   // $scope.getRestaurants(currentId);
   // veto(business_id);
   // postLocation(location);
+=======
+angular.module('cleaverApp', [])
+
+.controller('MainController', function($scope, Rec) {
+  $.extend($scope, Rec);
+>>>>>>> origin/master
 });
