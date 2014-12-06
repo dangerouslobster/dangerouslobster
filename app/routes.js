@@ -21,7 +21,7 @@ module.exports = function(app) {
     // 3rd arg is num of recs to return.
     var recSession = new RecSession(req.body.location, utils.generateUID(), 5);
     recSessions.addSession(recSession);
-    recSession.getYelpData(function(err, data, res){
+    recSession.getYelpData(function(err, data){
       res.json({
         uniqueID: recSession.uniqueID,
         yelpData: data

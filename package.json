@@ -12,5 +12,8 @@
     "oauth": "^0.9.12",
     "querystring": "^0.2.0",
     "request": "^2.49.0"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.3.0-alpha10"
   }
 }
