@@ -11,14 +11,14 @@
       </div>
     </div>
 
-    <div class='row' ng-repeat="restaurant in data.restaurants">
+    <div class='row' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes">
       <div class='eight wide column'>
         <div class='ui segment' ng-click="vetoRestaurant(restaurant.id)">
           <div class="ui three column relaxed fitted grid">
             <div class="five wide center aligned column">
               <img class="ui middle aligned center aligned circular tiny image" src="{{restaurant.image_url}}">
               <div class="row" style="font-size: 125%">
-                <span ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[1]); $event.stopPropagation();"> {{category[0]}} </span>
+                <span ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[1]); $event.stopPropagation();"> {{category[0]}}</span>
               </div>
             </div> <!-- FIRST COLUMN -->
 
@@ -33,10 +33,10 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span> 123 Pennsylvania Ave. </span></td>
+                    <td><span>{{restaurant.location.display_address[0]}}</span></td>
                   </tr>
                   <tr>
-                    <td>Washington, DC 12345</td>
+                    <td>{{restaurant.location.display_address[1]}}</td>
                   </tr>
                   <tr>
                     <td><span>{{restaurant.display_phone}}</span></td>
@@ -66,7 +66,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><span> {{restaurant.review_count}} Reviews </span></td>
+                    <td><span>{{restaurant.review_count}} Reviews</span></td>
                   </tr>
                   <tr>
                     <td>$$</td>
