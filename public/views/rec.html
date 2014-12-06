@@ -15,18 +15,38 @@
       <div class='eight wide column'>
         <div class='ui segment' ng-click="vetoRestaurant(restaurant.id)">
           <div class="ui three column relaxed fitted grid">
-
-            <div class="three wide column">
-              <img class="ui middle aligned circular tiny image" src="{{restaurant.image_url}}">
+            <div class="five wide center aligned column">
+              <img class="ui middle aligned center aligned circular tiny image" src="http://s3-media2.fl.yelpcdn.com/bphoto/FOr7HkVjR44WkF_ZkR3pdA/ms.jpg">
+              <div class="row" style="font-size: 125%">
+                <span ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[1]); $event.stopPropagation();"> {{category[0]}} </span>
+              </div>
             </div> <!-- FIRST COLUMN -->
 
-            <div class="nine wide column">
-              <div class='row' id="ht">
-                <span class="header left floated" ><b>{{restaurant.name}}</b></span>
+            <div class="seven wide column">
+              <table>
+                <thead>
+                <tr>
+                  <th>
+                    <b style="font-size: 175%">{{restaurant.name}}</b>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span> 123 Pennsylvania Ave. </span></td>
+                  </tr>
+                  <tr>
+                    <td>Washington, DC 12345</td>
+                  </tr>
+                  <tr>
+                    <td><span>{{restaurant.display_phone}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- <div class='row' id="ht">
+                <span class="header left floated" ><b>China Star</b></span>
               </div>
-              <div class="row">
-                <span>{{restaurant.display_phone}}</span>
-              </div>
+
               <div class="row" id="awef">
                 <span>{{restaurant.location.display_address[0]}}</span>
               </div>
@@ -34,25 +54,30 @@
                 <span>{{restaurant.location.display_address[3]}}</span>
               </div>
               <div class="row">
-                <span ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[1]); $event.stopPropagation();"> {{category[0]}} </span>
-              </div>
+              -->
+
             </div> <!-- SECOND COLUMN -->
+            <div class="four wide column" style="text-align: right; padding-top:22px">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img class="ui image" src="http://s3-media3.fl.yelpcdn.com/assets/2/www/img/34bc8086841c/ico/stars/v1/stars_3.png">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span> {{restaurant.review_count}} Reviews </span></td>
+                  </tr>
+                  <tr>
+                    <td>$$</td>
+                  </tr>
+                  <tr>
+                    <td>1.5 Miles</td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <div class="four wide column">
-              <div class="row">
-                <img class="ui image" src="{{restaurant.rating_img_url}}">
-              </div>
-              <div class="row">
-                <span> {{restaurant.review_count}} Reviews </span>
-              </div>
-              <div class="row">
-                <span> $$ </span>
-              </div>
-              <div class="row">
-                <span> 1.5 Miles </span>
-              </div>
             </div> <!-- THIRD COLUMN -->
-
           </div> <!-- GRID -->
         </div> <!-- SEGMENT -->
       </div> <!-- FULL COLUMN -->
