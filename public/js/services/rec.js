@@ -1,7 +1,19 @@
-angular.module('cleaver.services', [])
+angular.module('cleaver.services', ['firebase'])
 
-.factory('Rec', function($http) {
+
+// this factory handles requests between the client and server
+.factory('Rec', function($http, $firebase) {
   var data = {};
+
+  var setupFirebase = function(uniqueID) {
+    var fb = new Firebase('https://cleaverapp.firebaseio.com/sessions');
+
+    var ref = fb.child(uniqueID + '/categoryVetoes');
+    data.categoryVetoes = $firebase(ref).$asArray();
+
+    var ref = fb.child(uniqueID + '/restaurantVetoes');
+    data.restaurantVetoes = $firebase(ref).$asArray();
+  };
 
   var postLocation = function(location) {
     return $http({
@@ -10,49 +22,43 @@ angular.module('cleaver.services', [])
       data: { location: location }
     }).then(function(resp) {
       data.id = resp.data.uniqueID;
-      data.recs = resp.data.recs;
-      console.log('postLocation: \n', data);
-    });
-  };
+      data.yelpData = resp.data.yelpData;
 
-  var getRestaurants = function() {
-    return $http({
-      method: 'GET',
-      url: '/' + data.id
-    })
-    .then(function (resp) {
-      data.recs = resp.data;
+      setupFirebase(data.id);
     });
   };
 
   var vetoCategory = function(category) {
-    return $http({
-      method: 'POST',
-      url: '/' + data.id,
-      data: {key: "category", val: category}
-    }).then(function(resp) {
-      data.recs = resp.data;
-      console.log('vetoCategory: \n', data);
-
-    });
+    data.categoryVetoes.$add({category: category});
   };
 
   var vetoRestaurant = function(restaurantID) {
-    return $http({
-      method: 'POST',
-      url: '/' + data.id,
-      data: {key: "id", val: restaurantID}
-    }).then(function(resp) {
-      data.recs = resp.data;
-      console.log('vetoRestaurant: \n', data);
-    });
+    data.restaurantVetoes.$add({restaurantID: restaurantID});
   };
 
   return {
-    getRestaurants: getRestaurants,
     postLocation: postLocation,
     vetoRestaurant: vetoRestaurant,
     vetoCategory: vetoCategory,
     data: data
   };
+})
+.filter('removeVetoes', function(restaurantVetoes, categoryVetoes) {
+  return function(restaurant) {
+    // check for restaurant vetoes
+    for (var i = 0; i < restaurantVetoes.length; i++) {
+      if (restaurantVetoes[i].id === restaurant.id) {
+        return false;
+      }
+    }
+    // check for category vetoes
+    for (var i = 0; i < categoryVetoes; i++) {
+      for (var j = 0; j < restaurant.categories[0].length; j++) {
+        if (categoryVetoes[i].category === restaurant.categories[0][j]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 });
