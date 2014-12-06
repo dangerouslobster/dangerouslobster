@@ -22,7 +22,7 @@ angular.module('cleaver.services', ['firebase'])
       data: { location: location }
     }).then(function(resp) {
       data.id = resp.data.uniqueID;
-      data.yelpData = resp.data.yelpData;
+      data.restaurants = resp.data.yelpData.businesses;
 
       setupFirebase(data.id);
     });
