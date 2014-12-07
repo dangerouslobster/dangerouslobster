@@ -3,7 +3,7 @@
     <div class='ui segment'>
       <div class="ui three column relaxed fitted grid">
         <div class="five wide center aligned column">
-          <img class="ui middle aligned center aligned circular tiny image" src="{{restaurant.image_url}}">
+          <img class="ui middle aligned center aligned circular tiny image" ng-src="{{restaurant.image_url}}">
           <div class="row" style="font-size: 125%">
             <span class="mini ui button" ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);"> {{category[0]}}</span>
           </div>
@@ -36,7 +36,7 @@
             <tbody>
               <tr>
                 <td>
-                  <img class="ui image" src="{{restaurant.rating_img_url}}">
+                  <img class="ui image" ng-src="{{restaurant.rating_img_url}}">
                 </td>
               </tr>
               <tr>

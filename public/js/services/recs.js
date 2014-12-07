@@ -84,8 +84,8 @@ angular.module('cleaver.services', ['firebase'])
       }
       // check for category vetoes
       for (var categoryVeto in categoryVetoes) {
-        for (var j = 0; j < restaurant.categories[0].length; j++) {
-          if (categoryVeto === restaurant.categories[0][j]) {
+        for (var j = 0; j < restaurant.categories.length; j++) {
+          if (categoryVeto === restaurant.categories[j][0]) {
             return;
           }
         }
