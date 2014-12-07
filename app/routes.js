@@ -32,17 +32,17 @@ module.exports = function(app) {
         res.json({
           uniqueID: recSession.uniqueID,
           yelpData: data
-        })
+        });
       });
     }else{
-      console.log('cached', location)
+      console.log('cached', location);
       data = locationCache[location].data;
       recSession.yelpData = data;
       res.json({
         uniqueID: recSession.uniqueID,
         yelpData: data
-      })
-    };
+      });
+    }
   });
   app.get('/:uid', function(req, res) {
     validateSession(req, res, function(_req, _res, thisSession) {

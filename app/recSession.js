@@ -15,7 +15,7 @@ Creates an instance of Recommendation Session
 var RecSession = function(loc, uid) {
   this.location = loc;
   this.uniqueID = uid;
-  this.yelpData;
+  // this.yelpData;
 };
 
 /*
@@ -48,7 +48,7 @@ RecSession.prototype.getYelpData = function(cb) {
       }
       this.yelpData.businesses = this.yelpData.businesses.concat(data.businesses);
       cb(err, this.yelpData, res);
-    }.bind(this))
+    }.bind(this));
   }.bind(this));
 };
 
