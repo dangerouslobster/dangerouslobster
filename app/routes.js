@@ -4,6 +4,8 @@ var RecSessions = require('./recSessions.js');
 
 // Instantiate a collection of RecSessions
 var recSessions = new RecSessions();
+// Cache for sessions by location
+var locationCache = {};
 
 // A utility function to get an existing session for requests to /uniqueID
 var validateSession = function(req, res, cb) {
@@ -18,14 +20,27 @@ var validateSession = function(req, res, cb) {
 
 module.exports = function(app) {
   app.post('/location', function(req, res) {
-    var recSession = new RecSession(req.body.location, utils.generateUID());
+    var location = req.body.location;
+    var recSession = new RecSession(location, utils.generateUID());
     recSessions.addSession(recSession);
-    recSession.getYelpData(function(err, data){
+    if(!locationCache[location]){
+      recSession.getYelpData(function(err, data){
+        locationCache[location] = recSession;
+        res.json({
+          uniqueID: recSession.uniqueID,
+          yelpData: data
+        })
+      });
+    }else{
+      console.log('cached', location)
+      data = locationCache[location].yelpData;
+      recSession.yelpData = data;
+      locationCache[location] = recSession;
       res.json({
         uniqueID: recSession.uniqueID,
         yelpData: data
       })
-    });
+    };
   });
   app.get('/:uid', function(req, res) {
     validateSession(req, res, function(_req, _res, thisSession) {
