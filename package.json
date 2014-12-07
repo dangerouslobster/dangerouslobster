@@ -4,15 +4,9 @@
   "dependencies": {
     "body-parser": "~1.4.2",
     "express": "~4.5.1",
-    "heap": "^0.2.5",
     "method-override": "~2.0.2",
-    "mongoose": "~3.8.0",
     "morgan": "^1.5.0",
-    "mustache": "^0.8.2",
-    "oauth": "^0.9.12",
-    "querystring": "^0.2.0",
-    "request": "^2.49.0",
-    "lodash": "*"
+    "oauth": "^0.9.12"
   },
   "devDependencies": {
     "jsdoc": "^3.3.0-alpha10"
