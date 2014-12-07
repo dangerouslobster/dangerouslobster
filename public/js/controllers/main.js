@@ -39,7 +39,7 @@ angular.module('cleaver.controllers', ['ui.router'])
     };
   };
 
-  $scope.enter = function(keyEvent, location) {
+  $scope.enter = function(location, keyEvent) {
     if (location && keyEvent.which === 13) {
       $scope.postLocation(location);
     }
