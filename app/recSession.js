@@ -47,7 +47,6 @@ RecSession.prototype.getYelpData = function(cb) {
         console.error('Error - Yelp API returned: ', err);
       }
       this.yelpData.businesses = this.yelpData.businesses.concat(data.businesses);
-      console.log(this.yelpData.businesses.length)
       cb(err, this.yelpData, res);
     }.bind(this))
   }.bind(this));
