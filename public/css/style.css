@@ -1,0 +1,21 @@
+.card {
+  padding-bottom: 2px;
+}
+
+td {
+  padding: 2px 0;
+}
+
+div.three img {
+  position: relative;
+  top: 2px;
+}
+
+div.four table, img {
+  float: right;
+}
+
+div.nine table {
+  position: relative;
+  top: -7px;
+}

@@ -1,15 +1,13 @@
-<div class='row' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes">
+<div class='card row' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes">
   <div class='eight wide column'>
     <div class='ui segment'>
+
       <div class="ui three column relaxed fitted grid">
-        <div class="five wide center aligned column">
-          <img class="ui middle aligned center aligned circular tiny image" ng-src="{{restaurant.image_url}}">
-          <div class="row" style="font-size: 125%">
-            <span class="mini ui button" ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);"> {{category[0]}}</span>
-          </div>
+        <div class="three wide center aligned column">
+          <img class="ui middle aligned center aligned rounded image" ng-src="{{restaurant.image_url}}">
         </div> <!-- FIRST COLUMN -->
 
-        <div class="seven wide column">
+        <div class="nine wide column">
           <table>
             <thead>
             <tr>
@@ -25,13 +23,13 @@
               <tr>
                 <td>{{restaurant.location.display_address[restaurant.location.display_address.length - 1]}}</td>
               </tr>
-              <tr>
-                <td><span>{{restaurant.display_phone}}</span></td>
-              </tr>
             </tbody>
           </table>
+          <div class="row" style="font-size: 125%">
+            <span class="mini ui button" ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);"> {{category[0]}}</span>
+          </div>
         </div> <!-- SECOND COLUMN -->
-        <div class="four wide column" style="text-align: right; padding-top:22px">
+        <div class="four wide column" style="text-align: right">
           <table>
             <tbody>
               <tr>
@@ -48,9 +46,11 @@
               <tr>
                 <td>1.5 Miles</td>
               </tr>
+              <tr>
+                <td>{{restaurant.display_phone}}</td>
+              </tr>
             </tbody>
           </table>
-
         </div> <!-- THIRD COLUMN -->
       </div> <!-- GRID -->
     </div> <!-- SEGMENT -->
