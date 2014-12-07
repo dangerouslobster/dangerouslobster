@@ -17,6 +17,12 @@ angular.module('cleaver.controllers', [])
     }
   };
 
+  $scope.undoIt = function(){
+
+    Rec.undo($scope.lastVeto);
+    $scope.lastVeto = {};
+  };
+
   $scope.vetoRestaurant = function(restaurantID){
     Rec.vetoRestaurant(restaurantID);
     $scope.lastVeto = {

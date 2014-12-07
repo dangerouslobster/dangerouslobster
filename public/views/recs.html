@@ -1,4 +1,4 @@
-<div class="ui red button">Undo {{formatUndo()}} veto</div>
+<div class="ui red button" ng-click="undoIt()" ng-show="lastVeto.val">Undo {{formatUndo()}} veto</div>
 <div class='card row' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes">
   <div class='eight wide column'>
     <div class='ui segment'>
