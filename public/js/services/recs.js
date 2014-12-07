@@ -31,8 +31,7 @@ angular.module('cleaver.services', ['firebase'])
       data.restaurants = resp.businesses;
 
       for (var key in data.restaurants) {
-        console.log('awefawefawefawefwfeew')
-        data.restaurants[key].distance = calculateDistance(resp.longitude,resp.latitude,data.restaurants[key].longitude, data.restaurants[key].latitude)
+        data.restaurants[key].distance = calculateDistance(resp.data.yelpData.region.center.longitude,resp.data.yelpData.region.center.latitude,data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate. latitude)
       }
 
       setupFirebase(data.id);
@@ -53,7 +52,6 @@ angular.module('cleaver.services', ['firebase'])
       console.log(resp.data.yelpData)
 
       for (var key in data.restaurants) {
-        // console.log('awefawefawefawefwfeew')
         data.restaurants[key].distance = calculateDistance(resp.data.yelpData.region.center.longitude,resp.data.yelpData.region.center.latitude,data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate. latitude)
       }
 
@@ -79,7 +77,6 @@ angular.module('cleaver.services', ['firebase'])
       }
     }
 
-    console.log(lon1, lat1, lon2, lat2);
     dlon = (lon2 - lon1).toRad();
     dlat = (lat2 - lat1).toRad();
     lat1=lat1.toRad();
