@@ -8,7 +8,7 @@ angular.module('cleaver.controllers', [])
   $scope.enter = function(keyEvent, location) {
     if (location && keyEvent.which === 13) {
       $scope.postLocation(location);
-      $state.go('rec');
+      $state.go('home.recs');
     }
   };
 
