@@ -49,6 +49,7 @@ RecSession.prototype.getYelpData = function(cb) {
       this.yelpData.businesses = this.yelpData.businesses.concat(data.businesses);
       cb(err, this.yelpData, res);
     }.bind(this));
+
   }.bind(this));
 };
 
