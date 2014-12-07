@@ -138,7 +138,7 @@ angular.module('cleaver.services', ['firebase'])
 })
 .filter('filterDistance', function(){
   return function(restaurants, maxDistance){
-    if(typeof maxDistance === 'undefined'){
+    if(typeof maxDistance === 'undefined' || maxDistance === ''){
       maxDistance = Number.POSITIVE_INFINITY;
     }
     var filteredResults = [];
