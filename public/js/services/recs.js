@@ -12,6 +12,9 @@ angular.module('cleaver.services', ['firebase'])
 
     ref = fb.child(uniqueID + '/restaurantVetoes');
     data.restaurantVetoes = $firebase(ref).$asObject();
+
+    ref = fb.child(uniqueID + '/maxDistance');
+    data.maxDistance = $firebase(ref).$asObject();
   };
 
   var calculateScore = function(restaurant) {
@@ -101,6 +104,17 @@ angular.module('cleaver.services', ['firebase'])
     }
   };
 
+  var maxDistance = function(maxDistance){
+    if(typeof maxDistance !== 'undefined'){
+      console.log(maxDistance, 'set')
+      data.maxDistance.val = maxDistance;
+      data.maxDistance.$save();
+    }else{
+      console.log(data.maxDistance.val, 'get');
+      return data.maxDistance.val;
+    }
+  };
+
   return {
     calculateScore: calculateScore,
     postLocation: postLocation,
@@ -108,7 +122,8 @@ angular.module('cleaver.services', ['firebase'])
     vetoCategory: vetoCategory,
     calculateDistance: calculateDistance,
     data: data,
-    undo: undo
+    undo: undo,
+    maxDistance: maxDistance
   };
 })
 .filter('removeVetoes', function() {
