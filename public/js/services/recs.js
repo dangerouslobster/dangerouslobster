@@ -30,6 +30,10 @@ angular.module('cleaver.services', ['firebase'])
       data.id = uniqueID;
       data.restaurants = resp.businesses;
 
+      for (var key in data.restaurants) {
+        data.restaurants[key].distance = calculateDistance(resp.data.yelpData.region.center.longitude,resp.data.yelpData.region.center.latitude,data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate. latitude)
+      }
+
       setupFirebase(data.id);
     }).error(function(err) {
       $location.path('/');
@@ -44,6 +48,11 @@ angular.module('cleaver.services', ['firebase'])
     }).then(function(resp) {
       data.id = resp.data.uniqueID;
       data.restaurants = resp.data.yelpData.businesses;
+
+
+      for (var key in data.restaurants) {
+        data.restaurants[key].distance = calculateDistance(resp.data.yelpData.region.center.longitude,resp.data.yelpData.region.center.latitude,data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate. latitude)
+      }
 
       setupFirebase(data.id);
       $location.path('/' + data.id);
@@ -60,15 +69,35 @@ angular.module('cleaver.services', ['firebase'])
     data.categoryVetoes.$save();
   };
 
+  var calculateDistance = function(lon1, lat1, lon2, lat2){
+    if (typeof(Number.prototype.toRad) === "undefined") {
+      Number.prototype.toRad = function() {
+        return this * Math.PI / 180;
+      }
+    }
+
+    dlon = (lon2 - lon1).toRad();
+    dlat = (lat2 - lat1).toRad();
+    lat1=lat1.toRad();
+    lat2=lat2.toRad();
+    a = Math.sin(dlat/2) * Math.sin(dlat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dlon / 2) * Math.sin(dlon / 2);
+    c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1 - a) );
+    d = ( 3963.1676 * c );
+    return Math.round(d * 100) / 100;
+  }
+
+
   if (data.restaurants.length === 0 && $location.path() !== '/') {
     getExistingSession($location.path().substr(1));
   }
+
 
   return {
     calculateScore: calculateScore,
     postLocation: postLocation,
     vetoRestaurant: vetoRestaurant,
     vetoCategory: vetoCategory,
+    calculateDistance: calculateDistance,
     data: data
   };
 })
