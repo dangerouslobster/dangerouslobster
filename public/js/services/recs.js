@@ -31,7 +31,7 @@ angular.module('cleaver.services', ['firebase'])
       data.restaurants = resp.businesses;
 
       for (var key in data.restaurants) {
-        data.restaurants[key].distance = calculateDistance(resp.data.yelpData.region.center.longitude,resp.data.yelpData.region.center.latitude,data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate. latitude)
+        data.restaurants[key].distance = calculateDistance(resp.region.center.longitude,resp.region.center.latitude,data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate. latitude)
       }
 
       setupFirebase(data.id);
