@@ -49,7 +49,6 @@ angular.module('cleaver.services', ['firebase'])
       data.id = resp.data.uniqueID;
       data.restaurants = resp.data.yelpData.businesses;
 
-      console.log(resp.data.yelpData)
 
       for (var key in data.restaurants) {
         data.restaurants[key].distance = calculateDistance(resp.data.yelpData.region.center.longitude,resp.data.yelpData.region.center.latitude,data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate. latitude)
