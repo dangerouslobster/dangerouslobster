@@ -3,6 +3,8 @@
 <!-- > Pithy project description -->
 Cut to the chase when choosing a place to eat.
 
+[http://cleaver.io](http://cleaver.io)
+
 ## Team
 
   - __Product Owner__: Valentyn Boginskey
@@ -21,14 +23,15 @@ Cut to the chase when choosing a place to eat.
 
 ## Usage
 
-> Some usage instructions
+1. Clone the repository
+1. [Install dependencies](#installing-dependencies)
+1. Follow the instructions in `config/authConfig.example.js`
+1. Run the development server: `node server.js`
 
 ## Requirements
 
-- MongoDB
-- Express.js
-- Angular.js
 - Node.js
+- npm
 
 ## Development
 
