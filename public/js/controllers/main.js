@@ -40,10 +40,10 @@ angular.module('cleaver.controllers', [])
     };
   };
 
-  //TODO: clear input box on enter
-  $scope.enter = function(keyEvent, location) {
-    if (location && keyEvent.which === 13) {
+  $scope.enterLocation = function(location, keyEvent) {
+    if (location && keyEvent === undefined || keyEvent.which === 13) {
       $scope.postLocation(location);
+      $scope.location = '';
     }
   };
 
