@@ -23,9 +23,12 @@ module.exports = function(app) {
     var location = req.body.location;
     var recSession = new RecSession(location, utils.generateUID());
     recSessions.addSession(recSession);
-    if(!locationCache[location]){
+    if(!locationCache[location] || (Date.now() -locationCache[location].createdAt > 259200000)){
       recSession.getYelpData(function(err, data){
-        locationCache[location] = data;
+        locationCache[location] = {
+          createdAt: Date.now(),
+          data: data
+        };
         res.json({
           uniqueID: recSession.uniqueID,
           yelpData: data
@@ -33,7 +36,7 @@ module.exports = function(app) {
       });
     }else{
       console.log('cached', location)
-      data = locationCache[location];
+      data = locationCache[location].data;
       recSession.yelpData = data;
       res.json({
         uniqueID: recSession.uniqueID,
