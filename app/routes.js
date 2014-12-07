@@ -18,8 +18,7 @@ var validateSession = function(req, res, cb) {
 
 module.exports = function(app) {
   app.post('/location', function(req, res) {
-    // 3rd arg is num of recs to return.
-    var recSession = new RecSession(req.body.location, utils.generateUID(), 5);
+    var recSession = new RecSession(req.body.location, utils.generateUID());
     recSessions.addSession(recSession);
     recSession.getYelpData(function(err, data){
       res.json({
@@ -31,7 +30,7 @@ module.exports = function(app) {
 // Sends back uniqueID string
   app.get('/:uid', function(req, res) {
     validateSession(req, res, function(_req, _res, thisSession) {
-      _res.send(thisSession.uniqueID);
+      _res.send(thisSession.yelpData);
     });
   });
 

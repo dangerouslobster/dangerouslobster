@@ -9,13 +9,13 @@ angular.module('cleaverApp',
 
   $stateProvider
     .state('home', {
-    	templateUrl: 'views/home.html',
-    	controller: 'MainController',
-    	url: '/'
+        templateUrl: 'views/home.html',
+        controller: 'MainController',
+        url: '/'
     })
-    .state('rec', {
-    	templateUrl: 'views/rec.html',
-    	// controller: 'RecController',
-    	url: '/rec'
+    .state('home.recs', {
+        templateUrl: 'views/recs.html',
+        url: '^/{uniqueID:[a-z0-9]{6}}'
     });
+
 });

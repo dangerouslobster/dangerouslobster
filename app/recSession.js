@@ -12,7 +12,7 @@ Creates an instance of Recommendation Session
 @param {number} numRecs number of recommendations to return.
 */
 
-var RecSession = function(loc, uid, numRecs) {
+var RecSession = function(loc, uid) {
   this.location = loc;
   this.uniqueID = uid;
   this.yelpData;
