@@ -34,7 +34,8 @@ angular.module('cleaver.services', ['firebase'])
       data.restaurants = resp.businesses;
 
       for (var key in data.restaurants) {
-        data.restaurants[key].distance = calculateDistance(resp.region.center.longitude,resp.region.center.latitude,data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate. latitude)
+        data.restaurants[key].distance = calculateDistance(resp.region.center.longitude,resp.region.center.latitude,
+          data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate.latitude);
       }
 
       setupFirebase(data.id);
@@ -54,7 +55,8 @@ angular.module('cleaver.services', ['firebase'])
 
 
       for (var key in data.restaurants) {
-        data.restaurants[key].distance = calculateDistance(resp.data.yelpData.region.center.longitude,resp.data.yelpData.region.center.latitude,data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate. latitude)
+        data.restaurants[key].distance = calculateDistance(resp.data.yelpData.region.center.longitude,resp.data.yelpData.region.center.latitude,
+          data.restaurants[key].location.coordinate.longitude, data.restaurants[key].location.coordinate.latitude);
       }
 
       setupFirebase(data.id);
@@ -76,7 +78,7 @@ angular.module('cleaver.services', ['firebase'])
     if (typeof(Number.prototype.toRad) === "undefined") {
       Number.prototype.toRad = function() {
         return this * Math.PI / 180;
-      }
+      };
     }
 
     dlon = (lon2 - lon1).toRad();
@@ -87,7 +89,7 @@ angular.module('cleaver.services', ['firebase'])
     c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1 - a) );
     d = ( 3963.1676 * c );
     return Math.round(d * 100) / 100;
-  }
+  };
 
 
   if (data.restaurants.length === 0 && $location.path() !== '/') {
@@ -153,13 +155,13 @@ angular.module('cleaver.services', ['firebase'])
   return function(restaurants, maxDistance){
     if(typeof maxDistance === 'undefined'){
       maxDistance = Number.POSITIVE_INFINITY;
-    };
+    }
     var filteredResults = [];
     restaurants.forEach(function(restaurant){
       if(restaurant.distance < maxDistance){
-        filteredResults.push(restaurant)
+        filteredResults.push(restaurant);
       }
-    })
+    });
     return filteredResults;
-  }
+  };
 });
