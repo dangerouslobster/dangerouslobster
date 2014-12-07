@@ -27,7 +27,6 @@ module.exports = function(app) {
       })
     });
   });
-// Sends back uniqueID string
   app.get('/:uid', function(req, res) {
     validateSession(req, res, function(_req, _res, thisSession) {
       _res.send(thisSession.yelpData);
