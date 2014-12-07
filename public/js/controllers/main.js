@@ -2,6 +2,7 @@ angular.module('cleaver.controllers', ['ui.router'])
 
 .controller('MainController', function($scope, $state, Rec) {
   angular.extend($scope, Rec);
+  $scope.lastVeto = {};
   $scope.formatUndo = function(){
     if($scope.lastVeto && $scope.lastVeto.val){
       if($scope.lastVeto.key === 'category'){
