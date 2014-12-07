@@ -25,7 +25,7 @@ module.exports = function(app) {
     recSessions.addSession(recSession);
     if(!locationCache[location]){
       recSession.getYelpData(function(err, data){
-        locationCache[location] = recSession;
+        locationCache[location] = data;
         res.json({
           uniqueID: recSession.uniqueID,
           yelpData: data
@@ -33,9 +33,8 @@ module.exports = function(app) {
       });
     }else{
       console.log('cached', location)
-      data = locationCache[location].yelpData;
+      data = locationCache[location];
       recSession.yelpData = data;
-      locationCache[location] = recSession;
       res.json({
         uniqueID: recSession.uniqueID,
         yelpData: data
