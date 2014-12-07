@@ -27,6 +27,7 @@ Gets the restaurant data from Yelp and saves it in the instance of RecSession.
 
 RecSession.prototype.getYelpData = function(cb) {
   var yelpClient = new yelp.YelpClient(authConfig);
+  this.yelpClient = yelpClient;
   var searchParams = {
     sort: 1,
     radius_filter: 5000,
@@ -39,7 +40,15 @@ RecSession.prototype.getYelpData = function(cb) {
     }
 
     this.yelpData = data;
-    cb(err, data, res);
+    searchParams.offset = 20;
+    searchParams.limit = 20;
+    yelpClient.searchRestaurants(searchParams, function(err, data, res){
+      if (err) {
+        console.error('Error - Yelp API returned: ', err);
+      }
+      this.yelpData.businesses = this.yelpData.businesses.concat(data.businesses);
+      cb(err, this.yelpData, res);
+    }.bind(this))
   }.bind(this));
 };
 
