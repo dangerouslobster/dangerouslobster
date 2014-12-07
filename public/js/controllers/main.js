@@ -1,4 +1,4 @@
-angular.module('cleaver.controllers', [])
+angular.module('cleaver.controllers', ['ui.router'])
 
 .controller('MainController', function($scope, $state, Rec) {
   angular.extend($scope, Rec);
@@ -39,7 +39,6 @@ angular.module('cleaver.controllers', [])
     };
   };
 
-  //TODO: clear input box on enter
   $scope.enter = function(keyEvent, location) {
     if (location && keyEvent.which === 13) {
       $scope.postLocation(location);
