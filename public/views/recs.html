@@ -1,4 +1,7 @@
-<div class='card row' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes">
+<div class="ui fluid input">
+  <input ng-model="maxDistance" type="text"  placeholder="Enter max distance in miles"/>
+</div>
+<div class='card row' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes | filterDistance:maxDistance">
   <div class='eight wide column'>
     <div class='ui segment'>
 
