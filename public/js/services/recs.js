@@ -1,8 +1,7 @@
 angular.module('cleaver.services', ['firebase'])
 
-
 // this factory handles requests between the client and server
-.factory('Rec', function($http, $firebase) {
+.factory('Rec', function($http, $location, $firebase) {
   var data = {restaurants: []};
 
   var setupFirebase = function(uniqueID) {
@@ -11,7 +10,7 @@ angular.module('cleaver.services', ['firebase'])
     var ref = fb.child(uniqueID + '/categoryVetoes');
     data.categoryVetoes = $firebase(ref).$asObject();
 
-    var ref = fb.child(uniqueID + '/restaurantVetoes');
+    ref = fb.child(uniqueID + '/restaurantVetoes');
     data.restaurantVetoes = $firebase(ref).$asObject();
   };
 
@@ -21,6 +20,20 @@ angular.module('cleaver.services', ['firebase'])
     var weightedStars = Math.pow(restaurant.rating, 1.5);
 
     return -(weightedReviews * weightedStars);
+  };
+
+  var getExistingSession = function(uniqueID) {
+    return $http({
+      method: 'GET',
+      url: '/' + uniqueID
+    }).success(function(resp) {
+      data.id = uniqueID;
+      data.restaurants = resp.businesses;
+
+      setupFirebase(data.id);
+    }).error(function(err) {
+      $location.path('/');
+    });
   };
 
   var postLocation = function(location) {
@@ -33,6 +46,7 @@ angular.module('cleaver.services', ['firebase'])
       data.restaurants = resp.data.yelpData.businesses;
 
       setupFirebase(data.id);
+      $location.path('/' + data.id);
     });
   };
 
@@ -45,6 +59,10 @@ angular.module('cleaver.services', ['firebase'])
     data.categoryVetoes[category] = true;
     data.categoryVetoes.$save();
   };
+
+  if (data.restaurants.length === 0 && $location.path() !== '/') {
+    getExistingSession($location.path().substr(1));
+  }
 
   return {
     calculateScore: calculateScore,

@@ -18,7 +18,7 @@
 
     <!-- ANGULAR CUSTOM -->
     <script src="js/controllers/main.js"></script>
-    <script src="js/services/rec.js"></script>
+    <script src="js/services/recs.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body ng-app="cleaverApp" ng-controller="MainController">
@@ -26,12 +26,6 @@
 
       <!-- ANGULAR DYNAMIC CONTENT -->
       <div ui-view></div>
-      <div>{{data.categoryVetoes}}</div>
-      <div>{{data.restaurantVetoes}}</div>
-      <input type="text" ng-model="vetorest" placeholder="veto restaurant">
-      <button ng-click="vetoRestaurant(vetorest)">veto restaurant</button>
-      <input type="text" ng-model="vetocategory" placeholder="veto category">
-      <button ng-click="vetoCategory(vetocategory)">veto category</button>
     </div>
   </body>
 </html>
