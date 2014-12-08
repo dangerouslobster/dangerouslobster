@@ -1,3 +1,64 @@
+body {
+  background: url("../img/background_1.jpg");
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container {
+  background: rgba(3,95,170,0.3);
+  min-height: 100%
+}
+
+.opaque {
+  background-color: rgba(255,255,255,0.6);
+}
+
+.centered {
+  text-align: center;
+}
+
+.bar {
+  height: 100px;
+}
+
+.logo {
+  max-width: 90%;
+  max-height: 90%;
+  padding: 20px 0;
+}
+
+.huge {
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 6rem;
+  font-weight: 300;
+  letter-spacing: 0.18rem;
+  margin-top: 8%;
+}
+
+.location {
+  margin: 0 auto;
+  padding: 5% 0;
+  max-width: 500px;
+}
+
+.ui.input > input {
+  border-radius: 30px;
+}
+
+.ui.input > input:focus {
+  background: #fff;
+}
+
+.recs {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
 .card {
   padding-bottom: 2px;
 }
@@ -11,7 +72,7 @@ div.three img {
   top: 2px;
 }
 
-div.four table, img {
+div.four table, div.four img {
   float: right;
 }
 
@@ -19,13 +80,14 @@ div.nine table {
   position: relative;
   top: -7px;
 }
+/*
 .ng-enter {
-  -webkit-transition: 1s linear all; /* Chrome */
+  -webkit-transition: 1s linear all;
   transition: 1s linear all;
   opacity: 0;
 }
 .ng-leave {
-  -webkit-transition: .5s linear all; /* Chrome */
+  -webkit-transition: .5s linear all;
   transition: .5s linear all;
   opacity: 1;
 }
@@ -36,7 +98,7 @@ div.nine table {
 .ng-leave.ng-leave-active {
   opacity: 0;
 }
-
+*/
 .restaurant-title:hover {
   cursor: pointer;
 }
