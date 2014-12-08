@@ -2,61 +2,58 @@
   <input ng-model-options="{ getterSetter: true }" ng-model="maxDistance" type="text"  placeholder="Enter max distance in miles"/>
 </div>
 <div class="ui red button" ng-click="undoIt()" ng-show="lastVeto.val">Undo {{formatUndo()}} veto</div>
-<div class='card row' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes | filterDistance:maxDistance()">
-  <div class='eight wide column'>
-    <div class='ui segment'>
+<div class='card' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes | filterDistance:maxDistance() | limitTo: 4">
+  <div class='ui segment'>
+    <div class="ui three column relaxed fitted grid">
+      <div class="three wide center aligned column">
+        <img class="ui middle aligned center aligned rounded image" ng-src="{{restaurant.image_url}}">
+      </div> <!-- FIRST COLUMN -->
 
-      <div class="ui three column relaxed fitted grid">
-        <div class="three wide center aligned column">
-          <img class="ui middle aligned center aligned rounded image" ng-src="{{restaurant.image_url}}">
-        </div> <!-- FIRST COLUMN -->
-
-        <div class="nine wide column">
-          <table>
-            <thead>
+      <div class="nine wide column">
+        <table>
+          <thead>
+          <tr>
+            <th>
+              <b class="restaurant-title" style="font-size: 175%" ng-click="vetoRestaurant(restaurant.id)">{{restaurant.name}}</b>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
             <tr>
-              <th>
-                <b class="restaurant-title" style="font-size: 175%" ng-click="vetoRestaurant(restaurant.id)">{{restaurant.name}}</b>
-              </th>
+              <td><span>{{restaurant.location.display_address[0]}}</span></td>
             </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>{{restaurant.location.display_address[0]}}</span></td>
-              </tr>
-              <tr>
-                <td>{{restaurant.location.display_address[restaurant.location.display_address.length - 1]}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="row" style="font-size: 125%">
-            <span class="mini ui button" ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);"> {{category[0]}}</span>
-          </div>
-        </div> <!-- SECOND COLUMN -->
-        <div class="four wide column" style="text-align: right">
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <img class="ui image" ng-src="{{restaurant.rating_img_url}}">
-                </td>
-              </tr>
-              <tr>
-                <td><span>{{restaurant.review_count}} Reviews</span></td>
-              </tr>
-              <tr>
-                <td>$$</td>
-              </tr>
-              <tr>
-                <td>{{restaurant.distance}} Miles</td>
-              </tr>
-              <tr>
-                <td>{{restaurant.display_phone}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div> <!-- THIRD COLUMN -->
-      </div> <!-- GRID -->
-    </div> <!-- SEGMENT -->
-  </div> <!-- FULL COLUMN -->
-</div> <!-- ROW -->
+            <tr>
+              <td>{{restaurant.location.display_address[restaurant.location.display_address.length - 1]}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row" style="font-size: 125%">
+          <span class="mini ui button" ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);"> {{category[0]}}</span>
+        </div>
+      </div> <!-- SECOND COLUMN -->
+      <div class="four wide column" style="text-align: right">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <img class="ui image" ng-src="{{restaurant.rating_img_url}}">
+              </td>
+            </tr>
+            <tr>
+              <td><span>{{restaurant.review_count}} Reviews</span></td>
+            </tr>
+            <tr>
+              <td>$$</td>
+            </tr>
+            <tr>
+              <td>{{restaurant.distance}} Miles</td>
+            </tr>
+            <tr>
+              <td>{{restaurant.display_phone}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> <!-- THIRD COLUMN -->
+    </div> <!-- GRID -->
+  </div> <!-- SEGMENT -->
+</div>

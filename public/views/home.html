@@ -1,8 +1,8 @@
 <div class="opaque centered bar">
   <img class="logo" src="img/logo.png">
 </div>
-<div class="centered">
-  <h1 ng-show="!data.id" class="huge">Enter your location</h1>
+<div ng-show="!data.id" class="centered">
+  <h1 class="huge">Enter your location</h1>
   <div class="location">
     <div class="ui massive icon fluid input">
       <input ng-model="location" type="text" ng-keypress="enterLocation(location, $event)" placeholder="San Francisco" autofocus/>
