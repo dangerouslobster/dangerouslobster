@@ -1,9 +1,53 @@
 body {
   background: url("../img/background.jpg");
+  background-position: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.container {
+  background: rgba(0,0,0,0.3);
+  min-height: 100%
+}
+
+.top-bar {
+  background-color: rgba(255,255,255,0.6);
+  height: 100px;
+}
+
+.logo {
+  display: block;
+  margin: auto;
+  padding: 10px 0;
+}
+
+.ui.massive.icon.input {
+  display: block;
+  margin: 0 auto;
+  width: 400px;
+}
+
+.ui.massive.icon.input > input {
+  border-radius: 30px;
+}
+
+.ui.massive.icon.input > input:focus {
+  background: #fff;
+}
+
+.location {
+  color: white;
+}
+
+.location h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 70px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-top: 160px;
+  text-align: center;
 }
 
 .card {
@@ -19,7 +63,7 @@ div.three img {
   top: 2px;
 }
 
-div.four table, img {
+div.four table, div.four img {
   float: right;
 }
 
@@ -27,13 +71,14 @@ div.nine table {
   position: relative;
   top: -7px;
 }
+/*
 .ng-enter {
-  -webkit-transition: 1s linear all; /* Chrome */
+  -webkit-transition: 1s linear all;
   transition: 1s linear all;
   opacity: 0;
 }
 .ng-leave {
-  -webkit-transition: .5s linear all; /* Chrome */
+  -webkit-transition: .5s linear all;
   transition: .5s linear all;
   opacity: 1;
 }
@@ -44,7 +89,7 @@ div.nine table {
 .ng-leave.ng-leave-active {
   opacity: 0;
 }
-
+*/
 .restaurant-title:hover {
   cursor: pointer;
 }
