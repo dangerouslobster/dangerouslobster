@@ -32,6 +32,7 @@ angular.module('cleaver.services', ['firebase'])
     }).success(function(resp) {
       data.id = uniqueID;
       data.restaurants = resp.businesses;
+      angular.element(document.querySelector('i')).toggleClass('search').toggleClass('spinner');
 
       for (var key in data.restaurants) {
         data.restaurants[key].distance = calculateDistance(resp.region.center.longitude,resp.region.center.latitude,
@@ -52,7 +53,7 @@ angular.module('cleaver.services', ['firebase'])
     }).then(function(resp) {
       data.id = resp.data.uniqueID;
       data.restaurants = resp.data.yelpData.businesses;
-
+      angular.element(document.querySelector('i')).toggleClass('search').toggleClass('spinner');
 
       for (var key in data.restaurants) {
         data.restaurants[key].distance = calculateDistance(resp.data.yelpData.region.center.longitude,resp.data.yelpData.region.center.latitude,
