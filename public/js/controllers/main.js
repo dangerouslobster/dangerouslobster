@@ -44,6 +44,7 @@ angular.module('cleaver.controllers', [])
     };
   };
 
+  // submits the user's location input
   $scope.enterLocation = function(location, keyEvent) {
     if (location && (keyEvent === undefined || keyEvent.which === 13)) {
       $scope.postLocation(location);
