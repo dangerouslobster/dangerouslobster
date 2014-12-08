@@ -3,6 +3,10 @@ angular.module('cleaver.controllers', [])
 .controller('MainController', function($scope, $state, Rec) {
   angular.extend($scope, Rec);
   $scope.stateIs = $state.is;
+  $scope.location = '';
+  $scope.searchOptions = {
+    types: 'geocode'
+  }
   $scope.lastVeto = {};
 
   angular.element(document.body).css('background-image', 'url("../img/background_' +
