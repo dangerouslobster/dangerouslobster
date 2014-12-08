@@ -19,7 +19,6 @@ angular.module('cleaver.controllers', [])
   };
 
   $scope.undoIt = function(){
-
     Rec.undo($scope.lastVeto);
     $scope.lastVeto = {};
   };

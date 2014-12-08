@@ -1,53 +1,62 @@
 body {
-  background: url("../img/background.jpg");
+  background: url("../img/background_1.jpg");
   background-position: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .container {
-  background: rgba(0,0,0,0.3);
+  background: rgba(3,95,170,0.3);
   min-height: 100%
 }
 
-.top-bar {
+.opaque {
   background-color: rgba(255,255,255,0.6);
+}
+
+.centered {
+  text-align: center;
+}
+
+.bar {
   height: 100px;
 }
 
 .logo {
-  display: block;
-  margin: auto;
-  padding: 10px 0;
+  max-width: 90%;
+  max-height: 90%;
+  padding: 20px 0;
 }
 
-.ui.massive.icon.input {
-  display: block;
-  margin: 0 auto;
-  width: 400px;
-}
-
-.ui.massive.icon.input > input {
-  border-radius: 30px;
-}
-
-.ui.massive.icon.input > input:focus {
-  background: #fff;
+.huge {
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 6rem;
+  font-weight: 300;
+  letter-spacing: 0.18rem;
+  margin-top: 8%;
 }
 
 .location {
-  color: white;
+  margin: 0 auto;
+  padding: 5% 0;
+  max-width: 500px;
 }
 
-.location h1 {
-  font-family: 'Nunito', sans-serif;
-  font-size: 70px;
-  font-weight: 300;
-  letter-spacing: 2px;
-  margin-top: 160px;
-  text-align: center;
+.ui.input > input {
+  border-radius: 30px;
+}
+
+.ui.input > input:focus {
+  background: #fff;
+}
+
+.recs {
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 .card {

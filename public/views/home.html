@@ -1,15 +1,13 @@
-<div class='top-bar'>
+<div class="opaque centered bar">
   <img class="logo" src="img/logo.png">
 </div>
-<div class='location'>
-  <h1>Enter your location</h1>
-</div>
-<div class="ui massive icon input">
-  <input ng-model="location" type="text" ng-keypress="enterLocation(location, $event)" placeholder="San Francisco" autofocus/>
-  <i ng-click="enterLocation(location)" class="search icon"></i>
-</div>
-<div class='ui padded center aligned grid'>
-  <div class='eight wide column'>
-    <div ui-view></div>
+<div class="centered">
+  <h1 ng-show="!data.id" class="huge">Enter your location</h1>
+  <div class="location">
+    <div class="ui massive icon fluid input">
+      <input ng-model="location" type="text" ng-keypress="enterLocation(location, $event)" placeholder="San Francisco" autofocus/>
+      <i ng-click="enterLocation(location)" class="search icon"></i>
+    </div>
   </div>
 </div>
+<div class="recs" ui-view></div>

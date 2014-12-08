@@ -4,7 +4,6 @@ angular.module('cleaverApp',
     'cleaver.services',
     'ngAnimate'
   ])
-//TODO: Change to ui-router
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/");
 
