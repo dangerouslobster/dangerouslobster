@@ -26,6 +26,20 @@ var RecSession = function(loc, uid) {
   this.uniqueID = uid;
 };
 
+// Function for running scrapeDollars on all elements of businesses
+var scrapeAll = function(businesses, thisDolla){
+  for(key in businesses){
+    (function(key){
+      scrapeDollars(businesses[key].url, function(dollars){
+        var updateObj = {};
+        updateObj[businesses[key].id] = dollars;
+        // Firebase method "update" updates the firebase with new key, value pair
+        thisDolla.update(updateObj);
+      })
+    })(key)
+  }
+};
+
 // Takes in callback that will be pass (err, yelpData, res)
 RecSession.prototype.getYelpData = function(cb) {
   var yelpClient = new yelp.YelpClient(authConfig);
@@ -44,32 +58,16 @@ RecSession.prototype.getYelpData = function(cb) {
       console.error('Error - Yelp API returned: ', err);
     }
     // scrapes dollar signs for each restaurant
+
     this.yelpData = data;
-    for(key in data.businesses){
-      (function(key){
-        scrapeDollars(data.businesses[key].url, function(dollars){
-          var updateObj = {};
-          updateObj[data.businesses[key].id] = dollars;
-          // Firebase method "update" updates the firebase with new key, value pair
-          this.dollars.update(updateObj);
-        }.bind(this))
-      }.bind(this))(key)
-    }
+    scrapeAll(data.businesses, this.dollars);
     // Used to retrieve next 20 results.
     searchParams.offset = 20;
     searchParams.limit = 20;
     // Sends another request to get next 20 results.
     yelpClient.searchRestaurants(searchParams, function(err, data, res){
       // scrapes dollar signs for each restaurant
-      for(key in data.businesses){
-        (function(key){
-          scrapeDollars(data.businesses[key].url, function(dollars){
-            var updateObj = {};
-            updateObj[data.businesses[key].id] = dollars;
-            this.dollars.update(updateObj);
-          }.bind(this))
-        }.bind(this))(key)
-      }
+      scrapeAll(data.businesses, this.dollars);
       if (err) {
         console.error('Error - Yelp API returned: ', err);
       }
