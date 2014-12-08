@@ -4,6 +4,10 @@ angular.module('cleaver.controllers', [])
   angular.extend($scope, Rec);
   $scope.stateIs = $state.is;
   $scope.lastVeto = {};
+
+  angular.element(document.body).css('background', 'url("../img/background_' +
+    (Math.floor(Math.random() * 5) + 1) + '.jpg")');
+
   $scope.formatUndo = function(){
     if($scope.lastVeto && $scope.lastVeto.val){
       if($scope.lastVeto.key === 'category'){
