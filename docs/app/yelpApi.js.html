@@ -1,0 +1,57 @@
+<!DOCTYPE html><html><head><title>yelpApi.js</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="../docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="../index.html" class="source"><span class="file_name">README</span></a><a href="../app/recSession.js.html" class="source "><span class="base_path">app / </span><span class="file_name">recSession.js</span></a><a href="../app/routes.js.html" class="source "><span class="base_path">app / </span><span class="file_name">routes.js</span></a><a href="../app/recSessions.js.html" class="source "><span class="base_path">app / </span><span class="file_name">recSessions.js</span></a><a href="../app/utils.js.html" class="source "><span class="base_path">app / </span><span class="file_name">utils.js</span></a><a href="../app/yelpApi.js.html" class="source selected"><span class="base_path">app / </span><span class="file_name">yelpApi.js</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"><h1>yelpApi.js</h1><div class="filepath">app/</div></th><th class="code"></th></tr></thead><tbody><tr id="section-1"><td class="docs"><div class="pilwrap"><a href="#section-1" class="pilcrow">&#182;</a></div>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">OAuth</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;oauth&#39;</span><span class="p">).</span><span class="nx">OAuth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">queryStr</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;querystring&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">urlTemplate</span> <span class="o">=</span> <span class="s2">&quot;http://api.yelp.com/v2/search?&quot;</span><span class="p">;</span></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><p>Client for sending YelpAPI requests.</p>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><p>takes in  authConfig
+OAuth configuration object of the form {
+OAuthToken: Token,
+OAuthTokenSecret: Token Secret,
+key: Consumer Key,
+secret: Consumer Secret
+}</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">YelpClient</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">authConfig</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">auth</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OAuth</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">authConfig</span><span class="p">.</span><span class="nx">key</span><span class="p">,</span> <span class="nx">authConfig</span><span class="p">.</span><span class="nx">secret</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">&#39;HMAC-SHA1&#39;</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">OAuthToken</span> <span class="o">=</span> <span class="nx">authConfig</span><span class="p">.</span><span class="nx">OAuthToken</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">OAuthTokenSecret</span> <span class="o">=</span> <span class="nx">authConfig</span><span class="p">.</span><span class="nx">OAuthTokenSecret</span><span class="p">;</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><p>Calls Yelp Search API - Generic
+Takes in params object that is converted into query strings.
+Takes in callback that is called with (err, data, res)</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">YelpClient</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">searchStuff</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">urlTemplate</span> <span class="o">+</span> <span class="nx">queryStr</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">params</span><span class="p">),</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">OAuthToken</span><span class="p">,</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">OAuthTokenSecret</span><span class="p">,</span>
+    <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">err</span><span class="p">){</span>
+        <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="nx">cb</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><p>Special function that searches for restaurants.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">YelpClient</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">searchRestaurants</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">params</span><span class="p">.</span><span class="nx">category_filter</span> <span class="o">=</span> <span class="s1">&#39;restaurants&#39;</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">searchStuff</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">YelpClient</span> <span class="o">=</span> <span class="nx">YelpClient</span><span class="p">;</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><p>// EXAMPLE USAGE
+var authConfig = {
+  OAuthToken: 'Token',
+  OAuthTokenSecret: 'TokenSecret',
+  key: 'Consumer Key',
+  secret: 'Consumer Secret'
+};</p>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><p>For testing purposes(command line use);
+authConfig.OAuthToken = process.argv[2];
+authConfig.OAuthTokenSecret = process.argv[3];
+authConfig.key = process.argv[4];
+authConfig.secret = process.argv[5];</p>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><p>var test = new YelpClient(authConfig);</p>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><p>test.searchRestaurants({
+  sort: '2',
+  radius_filter: 1000,
+  location: '944 Market Street, #8 San Francisco, CA 94102'
+}, function(err, data, res){
+  console.log(err, data)
+})</p>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr></tbody></table><div id="generated">generated Sun Dec 07 2014 19:35:21 GMT-0800 (PST)  </div></div></body></html>
