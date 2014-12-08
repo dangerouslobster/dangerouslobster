@@ -1,30 +1,15 @@
-/*
-Creates a new collection to hold RecSession models.
-@class
-*/
+// Collection class to hold RecSession instances
 var RecSessions = function(){
   this.sessions = {};
 };
 
 
-/*
-Getter for session model.
-@method getSession
-
-@param{string} Unique RecSession id.
-
-@returns {recSession} RecSession instance
-*/
+// Returns session based on uniqueId
 RecSessions.prototype.getSession = function(uid) {
   return this.sessions[uid];
 };
 
-/*
-Adds session model to collection.
-@method addSession
-
-@param{recSession} RecSession instance to add to collection
-*/
+// Adds a session to the collection
 RecSessions.prototype.addSession = function(session){
   this.sessions[session.uniqueID] = session;
 };
