@@ -46,9 +46,13 @@
       <div class="restaurant title row" ng-click="vetoRestaurant(restaurant.id)">{{restaurant.name}}</div>
       <div class="row">{{restaurant.location.display_address[0]}}</div>
       <div class="row">{{restaurant.location.display_address[restaurant.location.display_address.length - 1]}}</div>
-      <div class="button row" style="font-size: 125%">
-        <span class="mini ui button" ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);">{{category[0]}}</span>
+      <div ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);" class="ui red compact tiny right labeled icon button">
+        <i class="ban icon"></i>
+        {{category[0]}}
       </div>
+<!--       <div class="button row" style="font-size: 125%">
+        <span class="mini ui button" ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);">{{category[0]}}</span>
+      </div> -->
     </div>
     <div class="four wide right aligned column">
       <div class="row"><img class="restaurant rating" ng-src="{{restaurant.rating_img_url}}"></div>

@@ -86,6 +86,12 @@ body {
   font-weight: bold;
 }
 
+.ui[class*="right labeled"].icon.button {
+font-size: 0.95rem;
+padding-right: 3.57142em!important;
+padding-left: 1em!important;
+}
+
 .strike {
   text-decoration: line-through;
 }
