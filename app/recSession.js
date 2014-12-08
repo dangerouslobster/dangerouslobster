@@ -50,6 +50,7 @@ RecSession.prototype.getYelpData = function(cb) {
         scrapeDollars(data.businesses[key].url, function(dollars){
           var updateObj = {};
           updateObj[data.businesses[key].id] = dollars;
+          // Firebase method "update" updates the firebase with new key, value pair
           this.dollars.update(updateObj);
         }.bind(this))
       }.bind(this))(key)
