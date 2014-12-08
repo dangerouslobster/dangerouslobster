@@ -24,6 +24,7 @@ body {
 
 .bar {
   height: 100px;
+  margin-bottom: 70px;
 }
 
 .logo {
@@ -43,7 +44,6 @@ body {
 
 .location {
   margin: 0 auto;
-  padding: 5% 0;
   max-width: 500px;
 }
 
