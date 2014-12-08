@@ -2,7 +2,8 @@ angular.module('cleaverApp',
   ['ui.router',
     'cleaver.controllers',
     'cleaver.services',
-    'ngAnimate'
+    'ngAnimate',
+    'ngAutocomplete'
   ])
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/");
