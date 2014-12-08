@@ -43,7 +43,10 @@ angular.module('cleaver.controllers', [])
   $scope.enterLocation = function(location, keyEvent) {
     if (location && (keyEvent === undefined || keyEvent.which === 13)) {
       $scope.postLocation(location);
+<<<<<<< HEAD
       angular.element(document.querySelector('i')).toggleClass('search').toggleClass('spinner');
+=======
+>>>>>>> Hid input box on submit, small styling changes
     }
   };
 
