@@ -119,6 +119,10 @@ angular.module('cleaver.services', ['firebase'])
     }
   };
 
+  var strikeThrough = function(index) {
+    angular.element(document.querySelectorAll('b')[index]).toggleClass('strike');
+  }
+
   return {
     calculateScore: calculateScore,
     postLocation: postLocation,
@@ -127,7 +131,8 @@ angular.module('cleaver.services', ['firebase'])
     calculateDistance: calculateDistance,
     data: data,
     undo: undo,
-    maxDistance: maxDistance
+    maxDistance: maxDistance,
+    strikeThrough: strikeThrough
   };
 })
 .filter('removeVetoes', function() {
@@ -153,14 +158,26 @@ angular.module('cleaver.services', ['firebase'])
     return filteredResults;
   };
 })
-.filter('filterDistance', function(){
+.filter('filterDistance', function() {
   return function(restaurants, maxDistance){
     if(typeof maxDistance === 'undefined' || maxDistance === ''){
       maxDistance = Number.POSITIVE_INFINITY;
     }
     var filteredResults = [];
-    restaurants.forEach(function(restaurant){
-      if(restaurant.distance < maxDistance){
+    restaurants.forEach(function(restaurant) {
+      if(restaurant.distance < maxDistance) {
+        filteredResults.push(restaurant);
+      }
+    });
+    return filteredResults;
+  };
+})
+.filter('removeClosedPerm', function() {
+  return function(restaurants) {
+    // check for closed restaurants
+    var filteredResults = [];
+    restaurants.forEach(function(restaurant) {
+      if (!restaurant.is_closed) {
         filteredResults.push(restaurant);
       }
     });
