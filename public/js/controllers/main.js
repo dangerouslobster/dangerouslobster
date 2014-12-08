@@ -1,13 +1,13 @@
-angular.module('cleaver.controllers', [])
+angular.module('cleaver.controllers', ['ngAutocomplete'])
 
 .controller('MainController', function($scope, $state, Rec) {
   angular.extend($scope, Rec);
   $scope.stateIs = $state.is;
-  $scope.location = '';
-  $scope.searchOptions = {
+  $scope.inputOptions = {
     types: 'geocode',
-    country: 'us'
-  }
+    country: 'us',
+    watchEnter: true
+  };
   $scope.lastVeto = {};
 
   angular.element(document.body).css('background-image', 'url("../img/background_' +
@@ -51,12 +51,11 @@ angular.module('cleaver.controllers', [])
   };
 
   // submits the user's location input
-  $scope.enterLocation = function(location, keyEvent) {
-    if (location && (keyEvent === undefined || keyEvent.which === 13)) {
-      $scope.postLocation(location);
-      $scope.location = '';
+  $scope.enterLocation = function(keyEvent) {
+    if ($scope.details && (keyEvent === undefined || keyEvent.which === 13)) {
+      $scope.postLocation($scope.details.formatted_address.slice(0, -5));
+      $scope.details = null;
       angular.element(document.querySelector('i')).toggleClass('search').toggleClass('spinner loading');
-
     }
   };
 

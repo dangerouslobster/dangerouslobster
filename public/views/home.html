@@ -5,8 +5,8 @@
   <h1 class="huge">Enter your location</h1>
   <div class="location">
     <div class="ui massive icon fluid input">
-      <input ng-autocomplete options="searchOptions" ng-model="location" type="text" ng-keypress="enterLocation(location, $event)" placeholder="San Francisco" autofocus/>
-      <i ng-click="enterLocation(location)" class="search icon"></i>
+      <input ng-autocomplete options="inputOptions" details="details" ng-model="location" type="text" ng-keypress="enterLocation($event)" placeholder="San Francisco" autofocus/>
+      <i ng-click="enterLocation()" class="search icon"></i>
     </div>
   </div>
 </div>
