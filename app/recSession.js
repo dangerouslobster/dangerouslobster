@@ -75,6 +75,7 @@ RecSession.prototype.getYelpData = function(cb) {
       }
       // callback passed into getYelpData is called
       cb(err, this.yelpData, res);
+
     }.bind(this));
   }.bind(this));
 };
