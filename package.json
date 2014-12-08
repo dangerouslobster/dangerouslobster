@@ -4,7 +4,6 @@
   "dependencies": {
     "body-parser": "~1.4.2",
     "cheerio": "^0.18.0",
-    "docco-husky": "^0.3.3",
     "express": "~4.5.1",
     "firebase": "^2.0.6",
     "morgan": "^1.5.0",
@@ -12,6 +11,7 @@
     "request": "^2.49.0"
   },
   "devDependencies": {
+    "docco-husky": "^0.3.3",
     "jsdoc": "^3.3.0-alpha10"
   }
 }
