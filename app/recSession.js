@@ -21,7 +21,7 @@ RecSession.prototype.getYelpData = function(cb) {
   this.dollars = fb.child('/dollars');
   // Parameters passed to Yelp API
   var searchParams = {
-    sort: 1,
+    sort: 2,
     radius_filter: 8047,
     location: this.location
   };
