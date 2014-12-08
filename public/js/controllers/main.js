@@ -5,7 +5,8 @@ angular.module('cleaver.controllers', [])
   $scope.stateIs = $state.is;
   $scope.location = '';
   $scope.searchOptions = {
-    types: 'geocode'
+    types: 'geocode',
+    country: 'us'
   }
   $scope.lastVeto = {};
 
