@@ -5,7 +5,7 @@ angular.module('cleaver.controllers', [])
   $scope.stateIs = $state.is;
   $scope.lastVeto = {};
 
-  angular.element(document.body).css('background', 'url("../img/background_' +
+  angular.element(document.body).css('background-image', 'url("../img/background_' +
     (Math.floor(Math.random() * 5) + 1) + '.jpg")');
 
   $scope.formatUndo = function(){
