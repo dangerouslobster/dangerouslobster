@@ -35,7 +35,6 @@ angular.module('cleaver.services', ['firebase'])
     }).success(function(resp) {
       data.id = uniqueID;
       data.restaurants = resp.businesses;
-      angular.element(document.querySelector('i')).toggleClass('search').toggleClass('spinner');
 
       for (var key in data.restaurants) {
         data.restaurants[key].distance = calculateDistance(resp.region.center.longitude,resp.region.center.latitude,
