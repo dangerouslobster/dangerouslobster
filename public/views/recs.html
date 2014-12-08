@@ -42,7 +42,6 @@
   </div>
 
 </div>
-<div class="ui red button" ng-click="undoIt()" ng-show="lastVeto.val">Undo {{formatUndo()}} veto</div>
 <div class='ui segment' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes | filterDistance:maxDistance() | limitTo: 4 | removeClosedPerm" ng-mouseenter="strikeThrough($index)" ng-mouseleave="strikeThrough($index)">
   <div class="ui grid">
     <div class="twelve wide column">
