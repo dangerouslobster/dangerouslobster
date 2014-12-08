@@ -15,7 +15,6 @@ angular.module('cleaver.services', ['firebase'])
 
     ref = fb.child(uniqueID + '/maxDistance');
     data.maxDistance = $firebase(ref).$asObject();
-
     ref = fb.child(uniqueID + '/dollars');
     data.dollars = $firebase(ref).$asObject();
   };
