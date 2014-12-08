@@ -112,10 +112,12 @@ angular.module('cleaver.services', ['firebase'])
     }
   };
 
-  var maxDistance = function(maxDistance){
+  var maxDistance = function(maxDistance, event){
     if(typeof maxDistance !== 'undefined'){
       data.maxDistance.val = maxDistance;
       data.maxDistance.$save();
+      angular.element(document.querySelectorAll('a')).removeClass('active');
+      angular.element([event.srcElement]).addClass('active');
     }else{
       return data.maxDistance.val;
     }
