@@ -48,7 +48,7 @@ angular.module('cleaver.controllers', [])
     if (location && (keyEvent === undefined || keyEvent.which === 13)) {
       $scope.postLocation(location);
       $scope.location = '';
-      angular.element(document.querySelector('i')).toggleClass('search').toggleClass('spinner');
+      angular.element(document.querySelector('i')).toggleClass('search').toggleClass('spinner loading');
     }
   };
 
