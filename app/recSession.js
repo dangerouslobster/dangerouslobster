@@ -45,7 +45,7 @@ RecSession.prototype.getYelpData = function(cb) {
   var yelpClient = new yelp.YelpClient(authConfig);
   this.yelpClient = yelpClient;
   // Initialize reference to firebase dollars object.
-  this.dollars = fb.child(this.uniqueID + '/dollars');
+  this.dollars = fb.child('/dollars');
   // Parameters passed to Yelp API
   var searchParams = {
     sort: 1,
