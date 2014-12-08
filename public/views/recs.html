@@ -2,12 +2,16 @@
   <input ng-model-options="{ getterSetter: true }" ng-model="maxDistance" type="text"  placeholder="Enter max distance in miles"/>
 </div>
 <div class="ui red button" ng-click="undoIt()" ng-show="lastVeto.val">Undo {{formatUndo()}} veto</div>
+
+
+
 <div class='card' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes | filterDistance:maxDistance() | limitTo: 4">
   <div class='ui segment'>
     <div class="ui three column relaxed fitted grid">
       <div class="three wide center aligned column">
         <img class="ui middle aligned center aligned rounded image" ng-src="{{restaurant.image_url}}">
       </div> <!-- FIRST COLUMN -->
+
 
       <div class="nine wide column">
         <table>
@@ -43,7 +47,7 @@
               <td><span>{{restaurant.review_count}} Reviews</span></td>
             </tr>
             <tr>
-              <td>$$</td>
+              <td>{{data.dollars[restaurant.id]}}</td>
             </tr>
             <tr>
               <td>{{restaurant.distance}} Miles</td>
