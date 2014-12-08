@@ -1,7 +1,44 @@
-<div class="ui fluid input">
-  <input ng-model-options="{ getterSetter: true }" ng-model="maxDistance" type="text"  placeholder="Enter max distance in miles"/>
+<div class ="ui menu">
+  <a class="disabled item">
+     Distance (Miles)
+  </a>
+  <a class="item" ng-click="maxDistance(0.5, $event); activated=active" ng-class="activated">
+     0.5
+  </a>
+  <a class="item" ng-click="maxDistance(1, $event)">
+    1.0
+  </a>
+  <a class="item" ng-click="maxDistance(1.5, $event)">
+    1.5
+  </a>
+  <a class="item" ng-click="maxDistance(2, $event)">
+    2.0
+  </a>
+  <a class="item" ng-click="maxDistance(2.5, $event)">
+    2.5
+  </a>
+  <a class="item" ng-click="maxDistance(3, $event)">
+    3.0
+  </a>
+  <a class="item" ng-click="maxDistance(3.5, $event)">
+    3.5
+  </a>
+  <a class="item" ng-click="maxDistance(4, $event)">
+    4.0
+  </a>
+  <a class="item" ng-click="maxDistance(4.5, $event)">
+    4.5
+  </a>
+  <a class="item" ng-click="maxDistance(5, $event)">
+    5.0
+  </a>
+  <div class="right menu">
+    <div class="disabled item" ng-click="undoIt()" id="undoButton">
+      Undo Last Veto
+    </div>
+  </div>
+
 </div>
-<div class="ui red button" ng-click="undoIt()" ng-show="lastVeto.val">Undo {{formatUndo()}} veto</div>
 <div class='ui segment' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes | filterDistance:maxDistance() | limitTo: 4 | removeClosedPerm" ng-mouseenter="strikeThrough($index)" ng-mouseleave="strikeThrough($index)">
   <div class="ui grid">
     <div class="twelve wide column">

@@ -88,6 +88,15 @@ body {
 .strike {
   text-decoration: line-through;
 }
+
+#undoButton {
+  cursor: pointer;
+}
+
+#undoButton.disabled {
+  cursor: default;
+}
+
 /*
 .ng-enter {
   -webkit-transition: 1s linear all;

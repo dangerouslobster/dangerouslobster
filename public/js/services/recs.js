@@ -70,11 +70,14 @@ angular.module('cleaver.services', ['firebase'])
   var vetoRestaurant = function(restaurantID) {
     data.restaurantVetoes[restaurantID] = true;
     data.restaurantVetoes.$save();
+    angular.element(document.querySelectorAll('#undoButton')).removeClass('disabled');
+
   };
 
   var vetoCategory = function(category) {
     data.categoryVetoes[category] = true;
     data.categoryVetoes.$save();
+    angular.element(document.querySelectorAll('#undoButton')).removeClass('disabled');
   };
 
   var calculateDistance = function(lon1, lat1, lon2, lat2){
@@ -109,17 +112,19 @@ angular.module('cleaver.services', ['firebase'])
     }
   };
 
-  var maxDistance = function(maxDistance){
+  var maxDistance = function(maxDistance, event){
     if(typeof maxDistance !== 'undefined'){
       data.maxDistance.val = maxDistance;
       data.maxDistance.$save();
+      angular.element(document.querySelectorAll('a')).removeClass('active');
+      angular.element([event.srcElement]).addClass('active');
     }else{
       return data.maxDistance.val;
     }
   };
 
   var strikeThrough = function(index) {
-    angular.element(document.querySelectorAll('b')[index]).toggleClass('strike');
+    angular.element(document.querySelectorAll('.restaurant.title')[index]).toggleClass('strike');
   }
 
   return {
