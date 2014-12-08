@@ -4,6 +4,7 @@
 <div class="ui red button" ng-click="undoIt()" ng-show="lastVeto.val">Undo {{formatUndo()}} veto</div>
 
 
+
 <div class='card' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes | filterDistance:maxDistance() | limitTo: 4">
   <div class='ui segment'>
     <div class="ui three column relaxed fitted grid">
@@ -25,7 +26,6 @@
             <tr>
               <td><span>{{restaurant.location.display_address[0]}}</span></td>
             </tr>
-<<<<<<< HEAD
             <tr>
               <td>{{restaurant.location.display_address[restaurant.location.display_address.length - 1]}}</td>
             </tr>
