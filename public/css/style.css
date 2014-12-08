@@ -36,3 +36,7 @@ div.nine table {
 .ng-leave.ng-leave-active {
   opacity: 0;
 }
+
+.restaurant-title:hover {
+  cursor: pointer;
+}
