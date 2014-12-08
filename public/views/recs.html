@@ -39,21 +39,27 @@
   </div>
 
 </div>
-<div class='ui segment' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes | filterDistance:maxDistance() | limitTo: 4 | removeClosedPerm" ng-mouseenter="strikeThrough($index)" ng-mouseleave="strikeThrough($index)">
+<div class='ui segment' ng-repeat="restaurant in data.restaurants | orderBy:calculateScore | removeVetoes:data.restaurantVetoes:data.categoryVetoes | filterDistance:maxDistance() | limitTo: 4 | removeClosedPerm" ng-mouseenter="overlayBan($index)" ng-mouseleave="overlayBan($index)">
   <div class="ui grid">
     <div class="twelve wide column">
-      <img class="ui rounded restaurant image" ng-src="{{restaurant.image_url}}">
-      <div class="restaurant title row" ng-click="vetoRestaurant(restaurant.id)">{{restaurant.name}}</div>
+      <div class="ui rounded restaurant image" ng-style="{'background-image':'url({{restaurant.image_url}})'}" ng-click="vetoRestaurant(restaurant.id)">
+        <div class="ui rounded restaurant overlay image">
+          <i class="massive white ban icon"></i>
+        </div>
+      </div>
+      <div class="restaurant title row">{{restaurant.name}}</div>
       <div class="row">{{restaurant.location.display_address[0]}}</div>
       <div class="row">{{restaurant.location.display_address[restaurant.location.display_address.length - 1]}}</div>
-      <div class="button row" style="font-size: 125%">
-        <span class="mini ui button" ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);">{{category[0]}}</span>
+      <div ng-repeat="category in restaurant.categories" ng-click="vetoCategory(category[0]);" class="ui red compact tiny right labeled icon button">
+        <i class="ban icon"></i>
+        {{category[0]}}
       </div>
     </div>
     <div class="four wide right aligned column">
       <div class="row"><img class="restaurant rating" ng-src="{{restaurant.rating_img_url}}"></div>
       <div class="row">{{restaurant.review_count}} Reviews</div>
       <div class="row">{{data.dollars[restaurant.id]}}</div>
+      <div class="row">{{restaurant.distance}} Miles</div>
       <div class="row">{{restaurant.display_phone}}</div>
     </div>
   </div> <!-- GRID -->

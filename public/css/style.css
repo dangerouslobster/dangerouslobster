@@ -70,19 +70,46 @@ body {
 
 .restaurant.image {
   float: left;
-  min-height: 100px;
-  min-width: 100px;
+  height: 100px;
+  width: 100px;
   margin-right: 14px;
   margin-top: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.overlay {
+  background-color: rgba(217,92,92,0.75)!important;
+  margin: 0 0!important;
+  opacity: 0;
+  -webkit-transition: opacity .25s ease;
+  -moz-transition: opacity .25s ease;
+}
+
+.overlay .icon {
+  margin-left: 2px;
+  margin-top: -5px;
+  text-align: left;
+}
+
+.overlay.hover {
+  opacity: 1;
 }
 
 .restaurant.rating {
   margin-top: 8px;
+  margin-bottom: -8px;
 }
 
 .restaurant.title.row {
   font-size: 1.8rem;
   font-weight: bold;
+}
+
+.ui[class*="right labeled"].icon.button {
+font-size: 0.95rem;
+padding-right: 3.57142em!important;
+padding-left: 1em!important;
 }
 
 .strike {

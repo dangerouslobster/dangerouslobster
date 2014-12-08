@@ -6,14 +6,14 @@ var fs = require('fs');
 var scrapeDollars = function(loc, dollars){
   if(typeof loc === 'number'){
     loc = loc.toString();
-  };
+  }
   var sorts = ['&sortby=rating', '', '&sortby=review_count'];
   for(var j=0;j<3;j++){
     for(var i=0;i<5;i++){
       // Using yelp's own request URLs. (not public API)
       var url = 'http://www.yelp.com/search/snippet?find_desc=restaurants'+sorts[j]+'&find_loc='+loc+'&start=' + (10*i).toString();
       request.get(url, function(err, res, data){
-        if(err){console.log(err, 'err')};
+        if(err){console.log(err, 'err');}
 
         var results = JSON.parse(data);
         var $ = cheerio.load(results.search_results);
@@ -28,7 +28,7 @@ var scrapeDollars = function(loc, dollars){
               name = name[2];
             }else{
               name = null;
-            };
+            }
           }
           // Get dollar data
           var price = $(this).find('.price-range').text();
@@ -38,8 +38,8 @@ var scrapeDollars = function(loc, dollars){
             updateObj[name] = price;
             dollars.update(updateObj);
           }
-        })
-      })
+        });
+      });
     }
   }
 };
