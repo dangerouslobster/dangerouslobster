@@ -97,9 +97,6 @@ body {
   cursor: default;
 }
 
-.strike {
-  text-decoration: line-through;
-}
 /*
 .ng-enter {
   -webkit-transition: 1s linear all;
