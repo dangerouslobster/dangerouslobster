@@ -17,5 +17,4 @@ angular.module('cleaverApp',
         templateUrl: 'views/recs.html',
         url: '^/{uniqueID:[a-z0-9]{6}}'
     });
-
 });
