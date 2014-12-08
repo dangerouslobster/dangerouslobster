@@ -70,11 +70,14 @@ angular.module('cleaver.services', ['firebase'])
   var vetoRestaurant = function(restaurantID) {
     data.restaurantVetoes[restaurantID] = true;
     data.restaurantVetoes.$save();
+    angular.element(document.querySelectorAll('#undoButton')).removeClass('disabled');
+
   };
 
   var vetoCategory = function(category) {
     data.categoryVetoes[category] = true;
     data.categoryVetoes.$save();
+    angular.element(document.querySelectorAll('#undoButton')).removeClass('disabled');
   };
 
   var calculateDistance = function(lon1, lat1, lon2, lat2){

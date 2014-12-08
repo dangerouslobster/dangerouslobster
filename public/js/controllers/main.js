@@ -26,6 +26,7 @@ angular.module('cleaver.controllers', [])
   $scope.undoIt = function(){
     Rec.undo($scope.lastVeto);
     $scope.lastVeto = {};
+    angular.element(document.querySelectorAll('#undoButton')).addClass('disabled');
   };
 
   $scope.vetoRestaurant = function(restaurantID){
