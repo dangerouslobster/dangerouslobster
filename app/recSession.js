@@ -70,12 +70,12 @@ RecSession.prototype.getYelpData = function(cb) {
       scrapeAll(data.businesses, this.dollars);
       if (err) {
         console.error('Error - Yelp API returned: ', err);
+      } else {
+        this.yelpData.businesses = this.yelpData.businesses.concat(data.businesses);
       }
-      this.yelpData.businesses = this.yelpData.businesses.concat(data.businesses);
-      // callback passed into getYelpData is called if all dollar signs are back.
-      if(this.yelpData.dollars = this.yelpData.businesses.length){
-        cb(err, this.yelpData, res);
-      }
+      // callback passed into getYelpData is called
+      cb(err, this.yelpData, res);
+
     }.bind(this));
   }.bind(this));
 };
