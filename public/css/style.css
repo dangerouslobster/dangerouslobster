@@ -124,25 +124,25 @@ padding-left: 1em!important;
   cursor: default;
 }
 
-/*
-.ng-enter {
+
+.restaurants.ng-enter {
   -webkit-transition: 1s linear all;
   transition: 1s linear all;
   opacity: 0;
 }
-.ng-leave {
-  -webkit-transition: .5s linear all;
-  transition: .5s linear all;
+.restaurants.ng-leave {
+  -webkit-transition: .25s linear all;
+  transition: .25s linear all;
   opacity: 1;
 }
-.ng-enter.ng-enter-active {
+.restaurants.ng-enter.ng-enter-active {
     opacity: 1;
 }
 
-.ng-leave.ng-leave-active {
+.restaurants.ng-leave.ng-leave-active {
   opacity: 0;
 }
-*/
+
 .restaurant-title:hover {
   cursor: pointer;
 }
