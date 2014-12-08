@@ -81,6 +81,10 @@ div.nine table {
   position: relative;
   top: -7px;
 }
+
+.strike {
+  text-decoration: line-through;
+}
 /*
 .ng-enter {
   -webkit-transition: 1s linear all;

@@ -119,6 +119,14 @@ angular.module('cleaver.services', ['firebase'])
     }
   };
 
+  var strikeThrough = function(index) {
+    // var elem = [ angular.element(document.querySelectorAll('b'))[index]];
+    // console.log(elem);
+    // elem.toggleClass('strike');
+    angular.element(document.querySelectorAll('b')[index]).toggleClass('strike');
+
+  }
+
   return {
     calculateScore: calculateScore,
     postLocation: postLocation,
@@ -127,7 +135,8 @@ angular.module('cleaver.services', ['firebase'])
     calculateDistance: calculateDistance,
     data: data,
     undo: undo,
-    maxDistance: maxDistance
+    maxDistance: maxDistance,
+    strikeThrough: strikeThrough
   };
 })
 .filter('removeVetoes', function() {
