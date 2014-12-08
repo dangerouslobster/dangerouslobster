@@ -2,6 +2,7 @@ angular.module('cleaver.controllers', [])
 
 .controller('MainController', function($scope, $state, Rec) {
   angular.extend($scope, Rec);
+  $scope.stateIs = $state.is;
   $scope.lastVeto = {};
   $scope.formatUndo = function(){
     if($scope.lastVeto && $scope.lastVeto.val){
