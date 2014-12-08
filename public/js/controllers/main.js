@@ -50,7 +50,6 @@ angular.module('cleaver.controllers', [])
       $scope.postLocation(location);
       $scope.location = '';
       angular.element(document.querySelector('i')).toggleClass('search').toggleClass('spinner loading');
-
     }
   };
 
