@@ -8,6 +8,7 @@ var recSessions = new RecSessions();
 var locationCache = {};
 
 // A utility function to get an existing session for requests to /uniqueID
+// Sends 404 if session doesnt exist.
 var validateSession = function(req, res, cb) {
   var thisSession = recSessions.getSession(req.param('uid'));
 
@@ -21,10 +22,14 @@ var validateSession = function(req, res, cb) {
 module.exports = function(app) {
   app.post('/location', function(req, res) {
     var location = req.body.location;
+    // Creates new RecSession and adds it to collection on every post to /location
     var recSession = new RecSession(location, utils.generateUID());
     recSessions.addSession(recSession);
+    // Checks if location is cached or if cached location is older than 3 days.
     if(!locationCache[location] || (Date.now() -locationCache[location].createdAt > 259200000)){
+      // Refreshes location cache/gets new data.
       recSession.getYelpData(function(err, data){
+        // Stores yelpData in locationCache, keyed by location
         locationCache[location] = {
           createdAt: Date.now(),
           data: data
@@ -37,6 +42,7 @@ module.exports = function(app) {
     }else{
       console.log('cached', location);
       data = locationCache[location].data;
+      // Returns cached result
       recSession.yelpData = data;
       res.json({
         uniqueID: recSession.uniqueID,
@@ -45,6 +51,7 @@ module.exports = function(app) {
     }
   });
   app.get('/:uid', function(req, res) {
+    // For returning users, the UID is used to check if the associated session exists, then data is sent if exists.
     validateSession(req, res, function(_req, _res, thisSession) {
       _res.send(thisSession.yelpData);
     });
