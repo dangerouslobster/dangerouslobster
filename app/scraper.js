@@ -35,7 +35,6 @@ var scrapeDollars = function(loc, dollars){
           // If name exists, set the appropriate attribute on the dollars firebase object.
           if(name &&  name.length > 0){
             var updateObj = {};
-            console.log(name)
             updateObj[name] = price;
             dollars.update(updateObj);
           }
