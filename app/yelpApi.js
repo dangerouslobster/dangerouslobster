@@ -18,15 +18,6 @@ var YelpClient = function(authConfig){
   this.OAuthTokenSecret = authConfig.OAuthTokenSecret;
 };
 
-/**
-*Calls Yelp Search API - Generic (not just food)
-
-*@param {object} params - contains parameters to pass to Yelp API (converted to query strings).
-*Refer to Yelp API docs. See example at end of file
-
-*@param {callback} cb - callback called with (err, data, res)
-
-*/
 // Calls Yelp Search API - Generic
 // Takes in params object that is converted into query strings.
 // Takes in callback that is called with (err, data, res)
