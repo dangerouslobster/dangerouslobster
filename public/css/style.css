@@ -92,7 +92,7 @@ body {
   text-align: left;
 }
 
-.restaurant.image:hover .overlay {
+.overlay.hover {
   opacity: 1;
 }
 
