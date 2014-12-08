@@ -124,7 +124,7 @@ angular.module('cleaver.services', ['firebase'])
   };
 
   var strikeThrough = function(index) {
-    angular.element(document.querySelectorAll('b')[index]).toggleClass('strike');
+    angular.element(document.querySelectorAll('.restaurant.title')[index]).toggleClass('strike');
   }
 
   return {
