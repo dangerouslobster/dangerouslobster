@@ -5,6 +5,8 @@ Cut to the chase when choosing a place to eat.
 
 [http://cleaver.io](http://cleaver.io)
 
+Docs: [http://dangerouslobster.github.io/dangerouslobster](http://dangerouslobster.github.io/dangerouslobster)
+
 ## Team
 
   - __Product Owner__: Valentyn Boginskey
