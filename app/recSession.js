@@ -19,6 +19,8 @@ RecSession.prototype.getYelpData = function(cb) {
   this.yelpClient = yelpClient;
   // Initialize reference to firebase dollars object.
   this.dollars = fb.child('/dollars');
+  // Set the initial maximum distance
+  fb.child(this.uniqueID + '/maxDistance').update({val: 1});
   // Parameters passed to Yelp API
   var searchParams = {
     sort: 2,
