@@ -128,7 +128,7 @@ angular.module('cleaver.services', ['firebase'])
       data.maxDistance.$save();
       angular.element(document.querySelectorAll('a')).removeClass('active');
     }else{
-      if (!data.maxDistance.val) { return 1; }
+      if (!data.maxDistance) { return 1; }
       return data.maxDistance.val;
     }
   };
