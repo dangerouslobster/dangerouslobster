@@ -25,6 +25,8 @@ module.exports = function(app) {
     // Creates new RecSession and adds it to collection on every post to /location
     var recSession = new RecSession(location, utils.generateUID());
     recSessions.addSession(recSession);
+    // Set the initial maximum distance
+    recSession.fb.child(recSession.uniqueID + '/maxDistance').update({val: 1});
     // Checks if location is cached or if cached location is older than 3 days.
     if(!locationCache[location] || (Date.now() -locationCache[location].createdAt > 259200000)){
       // Refreshes location cache/gets new data.
