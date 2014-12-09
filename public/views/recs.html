@@ -2,34 +2,19 @@
   <a class="disabled item">
      Distance (Miles)
   </a>
-  <a class="item" ng-click="maxDistance(0.5, $event); activated=active" ng-class="activated">
-     0.5
+  <a class="item" ng-click="maxDistance(0.25)" ng-class="{active: 0.25 === maxDistance()}">
+     0.25
   </a>
-  <a class="item" ng-click="maxDistance(1, $event)">
+  <a class="item" ng-click="maxDistance(0.5)" ng-class="{active: 0.5 === maxDistance()}">
+    0.5
+  </a>
+  <a class="item" ng-click="maxDistance(1)" ng-class="{active: 1 === maxDistance()}">
     1.0
   </a>
-  <a class="item" ng-click="maxDistance(1.5, $event)">
-    1.5
-  </a>
-  <a class="item" ng-click="maxDistance(2, $event)">
+  <a class="item" ng-click="maxDistance(2)" ng-class="{active: 2 === maxDistance()}">
     2.0
   </a>
-  <a class="item" ng-click="maxDistance(2.5, $event)">
-    2.5
-  </a>
-  <a class="item" ng-click="maxDistance(3, $event)">
-    3.0
-  </a>
-  <a class="item" ng-click="maxDistance(3.5, $event)">
-    3.5
-  </a>
-  <a class="item" ng-click="maxDistance(4, $event)">
-    4.0
-  </a>
-  <a class="item" ng-click="maxDistance(4.5, $event)">
-    4.5
-  </a>
-  <a class="item" ng-click="maxDistance(5, $event)">
+  <a class="item" ng-click="maxDistance(5)" ng-class="{active: 5 === maxDistance()}">
     5.0
   </a>
   <div class="right menu">

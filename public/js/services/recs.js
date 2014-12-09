@@ -112,13 +112,16 @@ angular.module('cleaver.services', ['firebase'])
     }
   };
 
-  var maxDistance = function(maxDistance, event){
+  var maxDistance = function(maxDistance){
     if(typeof maxDistance !== 'undefined'){
       data.maxDistance.val = maxDistance;
       data.maxDistance.$save();
       angular.element(document.querySelectorAll('a')).removeClass('active');
-      angular.element([event.srcElement]).addClass('active');
     }else{
+      if (!data.maxDistance.val) {
+        data.maxDistance.val = 1;
+        data.maxDistance.$save();
+      }
       return data.maxDistance.val;
     }
   };
@@ -164,9 +167,6 @@ angular.module('cleaver.services', ['firebase'])
 })
 .filter('filterDistance', function() {
   return function(restaurants, maxDistance){
-    if(typeof maxDistance === 'undefined' || maxDistance === ''){
-      maxDistance = Number.POSITIVE_INFINITY;
-    }
     var filteredResults = [];
     restaurants.forEach(function(restaurant) {
       if(restaurant.distance < maxDistance) {
