@@ -36,7 +36,7 @@ RecSession.prototype.getYelpData = function(cb) {
 
     this.yelpData = data;
     // Uses scrapeDollars from scraper.js to scrape dollar data.
-    scrapeDollars(searchParams.location, this.dollars);
+    // scrapeDollars(searchParams.location, this.dollars);
     // Used to retrieve next 20 results.
     searchParams.offset = 20;
     searchParams.limit = 20;
