@@ -4,11 +4,11 @@ var utils = require('./utils.js');
 var fs = require('fs');
 var request = require('request');
 var Firebase = require('firebase');
-var fb = new Firebase('https://cleaverapp.firebaseio.com/sessions');
 var scrapeDollars = require('./scraper.js').scrapeDollars;
 
 // Takes in location{string} and unique id{string}
 var RecSession = function(loc, uid) {
+  this.fb = new Firebase('https://cleaverapp.firebaseio.com/sessions');
   this.location = loc;
   this.uniqueID = uid;
 };
@@ -18,12 +18,11 @@ RecSession.prototype.getYelpData = function(cb) {
   var yelpClient = new yelp.YelpClient(authConfig);
   this.yelpClient = yelpClient;
   // Initialize reference to firebase dollars object.
-  this.dollars = fb.child('/dollars');
-  // Set the initial maximum distance
-  fb.child(this.uniqueID + '/maxDistance').update({val: 1});
+  this.dollars = this.fb.child('/dollars');
+
   // Parameters passed to Yelp API
   var searchParams = {
-    sort: 2,
+    sort: 1,
     radius_filter: 8047,
     location: this.location
   };
